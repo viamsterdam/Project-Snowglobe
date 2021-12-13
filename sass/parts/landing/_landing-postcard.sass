@@ -1,0 +1,172 @@
+.landing-postcard
+    display: none
+    z-index: 50
+    overflow: hidden
+    &__inner
+        overflow: auto
+        height: 100%
+        padding-top: 30px
+        padding-bottom: 80px
+        +max-screen($breakpoint-md)
+            padding-bottom: 60px
+    &__steps
+
+    &__step
+        display: none
+        &.active
+            display: block
+
+    &__header
+        &__title
+            h3
+                font-size: 36px
+                text-transform: uppercase
+                display: none
+                +max-screen($breakpoint-md)
+                    font-size: 24px
+                &.active
+                    display: block
+    &__numbers-list
+        display: flex
+        justify-content: center
+        align-items: center
+        max-width: 388px
+        margin-left: auto
+        margin-right: auto
+        position: relative
+        margin-top: 40px
+        &__sep
+            height: 1px
+            background: #000
+            width: 115px
+        &__item
+            min-width: 52px
+            height: 52px
+            display: flex
+            align-items: center
+            justify-content: center
+            font-size: 24px
+            line-height: 1.2em
+            border: 1px solid #000
+            border-radius: 50%
+            tranisiton: 0.3s
+            +max-screen($breakpoint-sm)
+                min-width: 42px
+                height: 42px
+                font-size: 18px
+            &.active
+                background: #000
+                color: #fff
+
+    &__select
+        padding-top: 55px
+        max-width: 100%
+        &__list
+            margin: -25px
+        &__item
+            text-align: center
+            padding: 25px
+            +max-screen($breakpoint-sm)
+                display: flex
+                justify-content: center
+            &__inner
+                width: 100%
+                max-width: 365px
+                cursor: pointer
+                margin: auto
+            &__title
+                text-transform: uppercase
+                font-size: 14px
+                color: #fff
+                padding-bottom: 15px
+            &__image
+                border-radius: 16px
+                background: #fff
+                border: 1px solid #000
+                box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.44)
+                padding: 18px 20px
+                transition: 0.3s
+                .landing-postcard__select__item__inner:hover &
+                    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.44)
+                    transform: scale(1.05)
+                .landing-postcard__select__item__inner:active &
+                    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.44)
+                    transform: scale(1.02)
+                &__inner
+                    position: relative
+                    border-radius: 16px
+                    border: 1px solid #000
+                    overflow: hidden
+                    padding-bottom: 65%
+                img
+                    position: absolute
+                    width: 100%
+                    height: 100%
+                    top: 0
+                    left: 0
+                    object-fit: cover
+    &__share-wrapper
+        padding-top: 100px
+        +max-screen($breakpoint-md)
+            padding-top: 60px
+    &__share
+        text-align: center
+        padding-top: 80px
+        +max-screen($breakpoint-md)
+            padding-top: 40px
+        &-btn
+            display: inline-block
+            transition: 0.3s
+            &:hover
+                opacity: 0.5
+            &__inner
+                display: flex
+                align-items: center
+            &__txt
+                font-size: 36px
+                line-height: 1.1em
+                color: #000
+                background: transparent
+                border: none
+                text-transform: uppercase
+                border-bottom: 3px solid
+                cursor: pointer
+                +max-screen($breakpoint-sm)
+                    font-size: 24px
+            img
+                width: 27px
+                height: auto
+                margin-left: 27px
+                +max-screen($breakpoint-sm)
+                    width: 24px
+                
+
+.postcard__image
+    border-radius: 16px
+    background: #fff
+    border: 1px solid #000
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.44)
+    padding: 30px 35px
+    transition: 0.3s
+    height: 100%
+    +max-screen($breakpoint-lg)
+        margin-bottom: 40px
+    +max-screen($breakpoint-sm)
+        padding: 20px
+    &__inner
+        position: relative
+        border-radius: 16px
+        border: 1px solid #000
+        overflow: hidden
+        padding-bottom: 65%
+        height: 100%
+        img
+            position: absolute
+            width: 100%
+            height: 100%
+            top: 0
+            left: 0
+            object-fit: cover
+.postcard__image__wrapper
+    +max-screen($breakpoint-lg)
+        margin-bottom: 40px

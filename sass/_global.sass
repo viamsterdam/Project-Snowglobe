@@ -1,0 +1,37 @@
+#main
+	width: 100%
+	overflow: hidden
+	min-height: calc(100vh - 273px)
+	+max-screen($breakpoint-sm)
+
+#app-wrapper
+	padding-top: 115px
+	padding-bottom: 15px
+	.header-transparent &
+		padding-top: 0
+	+max-screen($breakpoint-xl)
+	+max-screen($breakpoint-lg)
+		padding-top: 115px
+	+max-screen($breakpoint-md)
+		padding-top: 90px
+	+max-screen($breakpoint-sm)
+		padding-top: 60px
+
+
+.divider
+	display: block
+	height: 1px
+	background: cfd0d2
+
+.app-container--y--middle
+	display: flex
+	flex-direction: column
+	justify-content: center
+
+.lottie
+	width: 100%
+	svg
+		width: 100%
+		height: auto
+
+.bg
