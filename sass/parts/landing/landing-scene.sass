@@ -1,0 +1,34 @@
+.scene
+    background-color: $color-blue-bg
+    &-bg
+        position: fixed
+        top: 5px
+        left: 0
+        height: 100%
+        width: auto
+        display: flex
+        &-item
+            &__bg-list
+                width: 100%
+                display: flex
+                flex-direction: column
+                justify-content: flex-end
+                height: 100%
+            &__bg-static
+                position: relative
+                z-index: 10
+            &__bg
+                position: fixed
+                left: 0
+                bottom: 0
+                display: none
+    &-item
+        &__bg
+            position: fixed
+            bottom: 0
+            left: 0
+            width: auto
+
+            display: none
+            &-1
+                display: block

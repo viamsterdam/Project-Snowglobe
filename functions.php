@@ -9,10 +9,4 @@ require get_template_directory().'/inc/custom-taxonomies.php';
 
 require get_template_directory().'/inc/acf.php';
 require get_template_directory().'/inc/theme-functions.php';
-require get_template_directory().'/inc/theme-components.php';
-require get_template_directory().'/inc/theme-shortcodes.php';
-
-require get_template_directory().'/inc/postcard.php';
-
-
 

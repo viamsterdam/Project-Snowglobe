@@ -23,11 +23,8 @@ function theme_load_scripts(){
 
 
     /*theme css*/
-    //wp_enqueue_style( 'fonts', 'https://use.typekit.net/zqd6ita.css');
 	wp_enqueue_style( 'main',get_template_directory_uri() . '/dist/main.min.css');
 
-	/*additional css*/
-    //wp_enqueue_style( 'slick',get_template_directory_uri() . '/js/libs/slick/slick.css');
 }
 
 //additional variables

@@ -43,3 +43,8 @@ function crunchify_cleanup_query_string( $src ){
 } 
 add_filter( 'script_loader_src', 'crunchify_cleanup_query_string', 15, 1 ); 
 add_filter( 'style_loader_src', 'crunchify_cleanup_query_string', 15, 1 );
+
+
+//hide admin bar
+function hide_admin_bar(){ return false; }
+add_filter( 'show_admin_bar', 'hide_admin_bar' );

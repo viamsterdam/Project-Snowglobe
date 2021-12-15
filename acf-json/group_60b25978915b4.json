@@ -1,0 +1,24 @@
+{
+    "key": "group_60b25978915b4",
+    "title": "Theme Options: Theme Options",
+    "fields": [],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-theme-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": false,
+    "modified": 1639522794
+}
