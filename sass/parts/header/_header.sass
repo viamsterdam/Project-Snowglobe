@@ -1,44 +1,12 @@
-#header
-	position: fixed
-	top: 0
-	left: 0
-	z-index: 100
-	width: 100%
-	transition: 0.3s
-
 .header
-	position: relative
+	position: fixed
+	top: 68px
+	left: 0
+	width: 100%
+
 	display: flex
 	align-items: center
-	z-index: 100
-	padding-top: 16px
-	padding-bottom: 95px
-	transition: 0.3s ease-out
-	+max-screen($breakpoint-lg)
-		padding-bottom: 50px
-	+max-screen($breakpoint-md)
-		padding-bottom: 16px
-	+max-screen($breakpoint-sm)
-		//flex-direction: column
-		padding-top: 10px
-		padding-bottom: 10px
-	&__left
-		width: 20%
-	&__center
-		width: 60%
-		text-align: center
-		line-height: 0
-	&__logo
-		width: 140px
-		max-width: 100%
-		display: inline-block
-		position: relative
-		z-index: 5
-		line-height: 0
-		+max-screen($breakpoint-sm)
-			width: 100px
-			max-width: 100%
-		img, svg
-			max-width: 100%
-			height: auto
-		&__img
+	justify-content: space-between
+
+	padding: 0 62px
+	box-sizing: border-box

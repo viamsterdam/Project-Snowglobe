@@ -10,6 +10,7 @@ html, body
 	height: 100%
 	cursor: default
 	touch-action: none
+	overscroll-behavior: none
 	&.header-active
 		//overflow: hidden
 	&.loading
@@ -22,6 +23,11 @@ body,html
 	background: #FFF
 	+mobile
 		-webkit-text-size-adjust: 100%
+
+body
+	position: fixed
+	top: 0
+	left: 0
 
 img, fieldset
 	border: 0

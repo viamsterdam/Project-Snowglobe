@@ -1,13 +1,70 @@
 .scene
     background-color: $color-blue-bg
+
+    &-scroll
+        &-outer
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            overflow-y: scroll
+            z-index: 1
+        &-inner
+            display: block
     &-bg
         position: fixed
-        top: 5px
+        top: 0
         left: 0
-        height: 100%
+        height: calc(100% - 145px)
         width: auto
         display: flex
+        pointer-events: none
+
+        background-color: $scene-1-color
+
+        &-layer
+            display: flex
+            align-items: flex-end
+            position: absolute
+            bottom: 0
+            left: 0
+            line-height: 0
+            &-1
+                position: relative
+                z-index: 5
+                width: 8245px
+                .scene-bg-layer__item
+                    position: relative
+                    &-1
+                        z-index: 3
+                    &-2
+                        z-index: 2
+                        margin-left: -1.3%
+                    &-3
+                        z-index: 1
+                        margin-left: -1.3%
+            &-2
+                z-index: 4
+                width: 92%
+            &-3
+                z-index: 3
+                width: 74%
+            &-4
+                z-index: 2
+                width: 51%
+            &-5
+                z-index: 1
+                width: 32%
+            &__item
+
+            &__full
+                width: 100%
+                img, div
+                    width: 100%
+
         &-item
+            position: relative
             &__bg-list
                 width: 100%
                 display: flex
@@ -18,10 +75,19 @@
                 position: relative
                 z-index: 10
             &__bg
-                position: fixed
+                position: absolute
                 left: 0
                 bottom: 0
-                display: none
+                //display: none
+                &-1
+                    position: relative
+                    z-index: 6
+                &-2
+                    z-index: 5
+                    width: 70%
+                &-3
+                    z-index: 4
+                    width: 60%
     &-item
         &__bg
             position: fixed
