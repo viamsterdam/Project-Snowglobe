@@ -32,7 +32,7 @@
             line-height: 0
             &-1
                 position: relative
-                z-index: 5
+                z-index: 6
                 width: 8245px
                 .scene-bg-layer__item
                     position: relative
@@ -88,6 +88,18 @@
                 &-3
                     z-index: 4
                     width: 60%
+
+    &-bg-car
+        position: fixed
+        bottom: -20px
+        //left: -400px
+        width: 300px
+        max-width: 30%
+        z-index: 5
+        transition: 0.4s
+        .started &
+            left: 68px
+
     &-item
         &__bg
             position: fixed

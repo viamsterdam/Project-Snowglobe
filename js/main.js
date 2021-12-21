@@ -12,5 +12,6 @@ var scene = new Scene();
 scene.init();
 scene.load();
 
+scene.initScroll();
 scene.initColors();
 scene.initSound();

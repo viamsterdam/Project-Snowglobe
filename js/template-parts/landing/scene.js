@@ -73,7 +73,10 @@ class Scene {
             element.bgLayer1.width(this.itemWidth);
         
         });
+    
+    }
 
+    initScroll(){
         let that = this;
         gsap.to(that.bgGlobal,{
             scrollTrigger: {
@@ -94,7 +97,7 @@ class Scene {
             x:  -that.totalWidth + that.screenWidth,
         });
 
-        gsap.to(that.bgLayer2,{
+        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
             scrollTrigger: {
                 id: "Scene",
                 trigger: that.sceneScrollInner,
@@ -110,7 +113,7 @@ class Scene {
             left: that.totalWidth,
         });
 
-        gsap.to(that.bgLayer3,{
+        gsap.to(that.carWrapper,{
             scrollTrigger: {
                 id: "Scene",
                 trigger: that.sceneScrollInner,
@@ -122,44 +125,8 @@ class Scene {
                 markers: false,
                 invalidateOnRefresh: true
             },
-            x: '-100%',
-            left: that.totalWidth,
+            left: that.totalWidth - 2*(that.screenWidth/3),
         });
-
-        gsap.to(that.bgLayer4,{
-            scrollTrigger: {
-                id: "Scene",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            x: '-100%',
-            left: that.totalWidth,
-        });
-
-        gsap.to(that.bgLayer5,{
-            scrollTrigger: {
-                id: "Scene",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            x: '-100%',
-            left: that.totalWidth,
-        });
-      
-
-        
     }
 
     initColors(){
@@ -244,6 +211,8 @@ class Scene {
             this.startButton.hide();
             this.sceneIntro.hide();
         },700);
+
+        this.car.play();
     }
 
     load(){
@@ -263,6 +232,20 @@ class Scene {
             }
         });
         this.animationsArray.push(this.loadAnimation);
+
+        this.carWrapper = $('#scene-car');
+        this.car = bodymovin.loadAnimation({
+            container: this.carWrapper.get(0), // Required
+            path: this.carWrapper.data('path'), // Required
+            renderer: 'svg', // Required
+            loop: true, // Optional
+            autoplay: false, // Optional
+            name: "Loader", // Name for future reference. Optional.
+            rendererSettings: {
+                
+            }
+        });
+        this.animationsArray.push(this.car);
 
         this.items.forEach(element => {
             element.block.height(this.itemWidth);
@@ -324,6 +307,7 @@ class Scene {
                     let val = (100*this.loadedAnimations/this.totalAnimations);
                     let randomShift = Math.floor(Math.random() * (5 + 5 + 1)) - 5;
                     val += randomShift;
+                    val = Math.floor(val);
                     this.loadProgress.text(val);
                 }
             });
