@@ -5,13 +5,18 @@
     width: 100%
     background-color: $color-blue-bg
     height: 145px
-    z-index: 20
+    z-index: 90
 
     &__start
         position: absolute
         left: 50%
         bottom: 48px
         transform: translateX(-50%)
+        transition: 0.5s ease-out
+        z-index: 5
+        .started &
+            transform: translateX(-50%) translateY(-20px)
+            opacity: 0
 
     &__language
         position: absolute
@@ -24,4 +29,51 @@
         bottom: 48px
 
     &__progress
-        display: none
+        position: fixed
+        bottom: 37px
+        left: 50%        
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        text-align: center
+
+        opacity: 0
+        transform: translateX(-50%) translateY(20px)
+        transition: 0.5s ease-out
+        transition-delay: 0.5s
+        .started &
+            display: flex
+            transform: translateX(-50%)
+            opacity: 1
+
+        &__txt
+            margin-bottom: 25px
+        &__circle
+            position: relative
+            width: 50px
+            height: 50px
+
+            &__bg
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+            &__icon
+                position: absolute
+                top: 26%
+                left: 26%
+                width: 48%
+                height: 48%
+                img
+                    width: 100%
+                    height: 100%
+                    object-fit: contain
+
+                    &.icon-desk
+                        +max-screen($breakpoint-md)
+                            display: none
+                    &.icon-mob
+                        +min-screen($breakpoint-md)
+                            display: none

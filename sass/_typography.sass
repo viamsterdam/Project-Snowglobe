@@ -37,17 +37,13 @@ body
 			&,& *
 				color: $default-text-color
 	&--size
-		&--12
-			font-size: 12px
-			line-height: 16px
-		&--14
-			font-size: 14px
-			line-height: 1.2em
-		&--16
-			font-size: 16px
-			line-height: 1.2em
-		&--24
-			font-size: 24px
+		
+	&--styled
+		font-family: $font-family-coveat
+		font-size: 24px
+		line-height: 1.25em
+		font-weight: bold
+		
 	
 
 .font
@@ -79,3 +75,21 @@ body
 		&-900 *
 			font-weight: 900
 
+h2,.h2
+	font-weight: normal
+	font-size: 70px
+	line-height: 1em
+	
+
+.content-block
+	p
+		font-weight: normal
+		font-size: 16px
+		line-height: 1.5em
+		letter-spacing: 0.01em
+		margin-bottom: 16px
+
+		&.text--styled
+			font-size: 24px
+			line-height: 1.25em
+			font-weight: bold

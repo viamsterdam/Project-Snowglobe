@@ -1,0 +1,28 @@
+.scene__intro
+    position: fixed
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    z-index: 30
+    .container
+        max-width: 1300px
+        margin: auto
+        padding-top: 28vh
+        display: flex
+        justify-content: space-between
+    
+    &__title
+        max-width: 570px
+        transition: 0.5s ease-out
+        .started &
+            transform: translateY(-20px)
+            opacity: 0
+    &__content
+        max-width: 510px
+        padding-top: 18px
+        transition: 0.5s ease-out
+        transition-delay: 0.2s
+        .started &
+            transform: translateY(-20px)
+            opacity: 0

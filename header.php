@@ -14,7 +14,7 @@
 </head>
 
 <?php
-$body_classes = '';
+$body_classes = 'loading';
 ?>
 
 <body <?php body_class($body_classes); ?>>

@@ -10,4 +10,7 @@ lottie();
 var scene = new Scene();
 
 scene.init();
+scene.load();
+
 scene.initColors();
+scene.initSound();
