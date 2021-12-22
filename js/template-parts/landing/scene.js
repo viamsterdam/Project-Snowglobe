@@ -1,7 +1,8 @@
 import $  from 'jquery';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bodymovin from "lottie-web";
+import bodymovin from 'lottie-web/build/player/lottie_svg.min.js';
+import bodymovinCanvas from 'lottie-web/build/player/lottie_canvas.min.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -367,10 +368,10 @@ class Scene {
         this.loadProgress = $('#loader-value');
 
         this.animationsArray = [];
-        this.loadAnimation = bodymovin.loadAnimation({
+        this.loadAnimation = bodymovinCanvas.loadAnimation({
             container: $('.scene-loader__img-wrapper').get(0), // Required
             path: $('#load-animation').data('path'), // Required
-            renderer: 'svg', // Required
+            renderer: 'canvas', // Required
             loop: false, // Optional
             autoplay: false, // Optional
             name: "Loader", // Name for future reference. Optional.

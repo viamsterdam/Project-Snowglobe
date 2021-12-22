@@ -1,6 +1,6 @@
 import $  from 'jquery';
 import jQuery  from 'jquery';
-import bodymovin from "lottie-web";
+import bodymovin from 'lottie-web/build/player/lottie_svg.min.js';
 
 
 function lottie(){
