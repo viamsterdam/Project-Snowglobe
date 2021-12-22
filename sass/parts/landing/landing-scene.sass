@@ -91,22 +91,37 @@
 
     &-bg-car
         position: fixed
-        bottom: -10px
-        //left: -400px
+        bottom: 140px
+        left: -400px
         width: 300px
         max-width: 30%
         z-index: 5
-        //transition: 0.4s
+        transition: 0.4s
         .started &
             left: 68px
 
     &-item
-        &__bg
+        opacity: 0
+        .started &
+            opacity: 1
+        &__content-point
             position: fixed
-            bottom: 0
-            left: 0
-            width: auto
-
-            display: none
-            &-1
-                display: block
+            top: 160px
+            left: 400px
+            &--card
+                //display: none
+                left: 50%
+                margin-left: -190px
+            &--text
+                .content-block
+                    max-width: 310px
+                    h2
+                        font-size: 60px
+                        line-height: 1.2em
+                    h3
+                        padding-bottom: 8px
+                    p
+                        font-family: $font-family-quicksand
+                        font-weight: 500
+                        font-size: 16px
+                        line-height: 22px

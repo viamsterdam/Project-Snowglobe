@@ -7,7 +7,7 @@ $headerLogo = get_field('header_logo','option');
 <header id="header" class="header">
 
     <div class="header-logo">
-        <img class="header-logo__item header-logo__item-main" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="Snowglobe">
+        <img class="header-logo__item header-logo__item-main active" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="Snowglobe">
         <img class="header-logo__item header-logo__item-1" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-geversduin.svg" alt="Geversduin Logo">
         <img class="header-logo__item header-logo__item-2" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-bakkum.svg" alt="Bakkum Logo">
         <img class="header-logo__item header-logo__item-3" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-de-lakum.svg" alt="De Lakum Logo">

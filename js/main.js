@@ -15,3 +15,4 @@ scene.load();
 scene.initScroll();
 scene.initColors();
 scene.initSound();
+scene.initContent();

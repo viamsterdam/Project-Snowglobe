@@ -42,6 +42,7 @@ class Scene {
 
             item.block = $(element);                   //jquery object of scene item
             item.points = [];                          //array of content points
+            item.logo = $('.header-logo__item-'+index);
             item.bgBlock = null;
             item.index = $(element).data('index');
 
@@ -78,6 +79,7 @@ class Scene {
 
     initScroll(){
         let that = this;
+
         gsap.to(that.bgGlobal,{
             scrollTrigger: {
                 id: "Scene",
@@ -91,12 +93,13 @@ class Scene {
                 invalidateOnRefresh: true,
                 onUpdate: self => {
                     that.progress = self.progress;
-                    console.log("progress:", self.progress);
+                    //console.log("progress:", self.progress);
                 }
             },
-            x:  -that.totalWidth + that.screenWidth,
+            ease: "none",
+            left:  -that.totalWidth + that.screenWidth,
         });
-
+        
         gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
             scrollTrigger: {
                 id: "Scene",
@@ -109,24 +112,12 @@ class Scene {
                 markers: false,
                 invalidateOnRefresh: true
             },
+            ease: "none",
             x: '-100%',
             left: that.totalWidth,
         });
 
-        gsap.to(that.carWrapper,{
-            scrollTrigger: {
-                id: "Scene",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            left: that.totalWidth - 2*(that.screenWidth/3),
-        });
+        
     }
 
     initColors(){
@@ -142,6 +133,7 @@ class Scene {
                 markers: false,
                 invalidateOnRefresh: true
             },
+            ease: "none",
             backgroundColor: '#F1AB79',
         });
         gsap.to(this.bgGlobal,{
@@ -156,6 +148,7 @@ class Scene {
                 markers: false,
                 invalidateOnRefresh: true
             },
+            ease: "none",
             backgroundColor: '#13558C',
         });
 
@@ -171,6 +164,7 @@ class Scene {
                 markers: false,
                 invalidateOnRefresh: true
             },
+            ease: "none",
             backgroundColor: '#2F2954',
         });
         gsap.to(this.sceneBar,{
@@ -185,8 +179,131 @@ class Scene {
                 markers: false,
                 invalidateOnRefresh: true
             },
+            ease: "none",
             backgroundColor: '#072A4D',
         });
+    }
+
+    initScenesChange(){
+        this.items.forEach(( element , index ) => {
+
+            gsap.from(element.block ,{
+                scrollTrigger: {
+                    trigger: element.block,
+                    scroller: this.sceneScrollOuter,
+                    start: "-2% top",
+                    end: "bottom 95%",
+                    scrub: false,
+                    markers: false,
+                    onToggle: function(self){
+                        if(self.isActive){
+                            $('.header-logo__item').removeClass('active');
+                            $('.header-logo__item-'+(index+1)).addClass('active');
+
+                            element.animation1.play();
+                            element.animation2.play();
+                            element.animation3.play();
+
+                        } else{
+                            element.animation1.pause();
+                            element.animation2.pause();
+                            element.animation3.pause();
+                        }
+                    },
+                },        
+            });
+           
+        });
+    }
+
+    initContent(){
+
+        //first screen
+        this.items.forEach((element , indexBlock ) => {
+            if(element.points.length){
+                let that = this;
+
+                let tl1 = gsap.from( element.points[0].block ,{
+                    scrollTrigger: {
+                      trigger: element.block,
+                      scroller: this.sceneScrollOuter,
+                      start: "-2% top",
+                      end: "20% 20%",
+                      scrub: false,
+                      markers: false,
+                      toggleActions: "play reverse play reverse",
+                      onUpdate: self => {
+                       
+                        //console.log("item progress "+indexBlock+"  first screen:", self.progress);
+        
+                      }
+                    },
+                    opacity: 0,
+                    y: 50
+                }); 
+                
+                let tl2 = gsap.from( element.points[1].block ,{
+                    scrollTrigger: {
+                      trigger: element.block,
+                      scroller: this.sceneScrollOuter,
+                      start: "20% top",
+                      end: "40% 40%",
+                      scrub: false,
+                      markers: false,
+                      toggleActions: "play reverse play reverse",
+                      onUpdate: self => {
+                       
+                        //console.log("item progress" +index+ ":", self.progress);
+        
+                      }
+                    },
+                    duration: 1, 
+                    opacity: 0,
+                    y: 50
+                }); 
+
+
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                      trigger: element.block,
+                      scroller: this.sceneScrollOuter,
+                      start: "40% top",
+                      end: "bottom 100%",
+                      scrub: true,
+                      markers: false,
+                      onUpdate: self => {
+                       
+                        //console.log("item progress" +indexBlock+ ":", self.progress);
+
+                      }
+                    }
+                });
+                let tl_end = gsap.timeline({
+                    scrollTrigger: {
+                      trigger: element.block,
+                      scroller: this.sceneScrollOuter,
+                      start: "90% top",
+                      end: "bottom 95%",
+                      scrub: false,
+                      markers: false,
+                      toggleActions: "reverse play play reverse",
+                      onUpdate: self => {
+                       
+                        //console.log("item progress" +indexBlock+ ":", self.progress);
+
+                      }
+                    }
+                });
+                
+                element.points.forEach((point,index) => {
+                    if(index >=2 ){
+                        tl.from(point.block, {left: this.screenWidth + 200, rotation: 360, duration: 1});
+                        tl_end.to(point.block, {scale: 0.1, opacity: 0, duration: 0.2});
+                    }
+                });
+            }
+        });
+
     }
 
     initSound(){
@@ -207,9 +324,19 @@ class Scene {
     
     startScene(e){
         $('body').addClass('started');
+
+        this.firstText = gsap.from( this.items[0].points[0].block ,{
+            opacity: 0,
+            y: 50
+        }).pause();
+
         setTimeout(()=>{
             this.startButton.hide();
             this.sceneIntro.hide();
+            this.firstText.play();
+
+            this.initScenesChange();
+
         },700);
 
         this.car.play();
@@ -314,6 +441,7 @@ class Scene {
            
         }
     }
+
     showScene(){
         setTimeout(()=>{
             this.loadScreen.hide();

@@ -31,20 +31,124 @@
     <div id="sceneScrollOuter" class="scene-scroll-outer">
         <div id="sceneScrollInner" class="scene-scroll-inner">
             <div class="scene-item scene-item-1" data-index="1">
-                <div class="scene-item__content">
-                    <div class="scene-item__content-point" data-appear="200">
-                        Welcome
+                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
+                        <div class="content-block">
+                            <h2>
+                                <span class="text--styled">Camping</span>
+                                Geversduin
+                            </h2>
+                        </div>
                     </div>
-                    <div class="scene-item__content-point" data-appear="800">
-                        Bye
+                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
+                        <div class="content-block">
+                            <h3>Welcome to Geversduin!</h3>
+                            <p>Discover the luxurious feeling of camping in the middle of nature here. Of course with lots of new surprises in 2022!</p>
+                        </div>
                     </div>
-                </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="40">
+                        <div class="card card-1">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-1.png" alt="Geversduin mark">
+                            <div class="card__content">
+                                <h3>A fantastic new square!</h3>
+                                <p>The front square has been extended and newly refurbished, meaning more space and more fun for everyone. We hope to see you leisurely enjoying yourself here soon!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
+                        <div class="card card-2">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-1.png" alt="Geversduin mark">
+                            <div class="card__content">
+                                <h3>New: Plastic House</h3>
+                                <p>Unique! Book a stay in one of the two holiday houses that we partially made from local waste plastic. The plastic was collected from the Castricum aan Zee beach. Super-green and still luxurious!</p>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="scene-item scene-item-2" data-index="2">
-                    
+                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
+                        <div class="content-block">
+                            <h2>
+                                <span class="text--styled">Camping</span>
+                                Bakkum
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
+                        <div class="content-block">
+                            <h3>Welcome to Bakkum!</h3>
+                            <p>Enjoying your own personal paradise together is the standard at Bakkum, because we always ask ourselves how we can make each season even better than the last!</p>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="40">
+                        <div class="card card-1">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-2.png" alt="Bakkum mark">
+                            <div class="card__content">
+                                <h3>New! <br>Bakkum’s Musical Group</h3>
+                                <p>A new Musical Group where children rehearse for a whole month to put on the musical Bon Bonni Beach. Will it star your family's musical talent too?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
+                        <div class="card card-2">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-2.png" alt="Bakkum mark">
+                            <div class="card__content">
+                                <h3>New:<br> Campervan Pitches de Luxe</h3>
+                                <p>A lovely sunny pitch for your campervan. Now with electricity, running water and a drain. Luxurious holiday enjoyment in 2022!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
+                        <div class="card card-3">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-2.png" alt="Bakkum mark">
+                            <div class="card__content">
+                                <h3>Bakkum Vertelt: bigger and better!</h3>
+                                <p>Renewed! Bakkum Vertelt. The multi-day festival full of exciting, moving and festive stories, performances and music has undergone a facelift. Bigger and Better still in 2022! </p>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="scene-item scene-item-3" data-index="3">
-                
+                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
+                        <div class="content-block">
+                            <h2>
+                                <span class="text--styled">Camping</span>
+                                De Lakens
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
+                        <div class="content-block">
+                            <h3>Welcome to the Lakens</h3>
+                            <p>The campsite where enjoying yourself, being active and relaxing go hand in hand, only 100 metres from the beach at Bloemendaal. Come and take your dose of Sun and Sea with us and become as Zen as possible!</p>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="40">
+                        <div class="card card-1">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-3.png" alt="De Lakens mark">
+                            <div class="card__content">
+                                <h3>New: Sun, Sea, Zen and…… <br>Sweat!</h3>
+                                <p>Before or after you spend loads of time unwinding, why not do that workout in our brand new building full of sports facilities? Or would you prefer to take your yoga-mat to a great relax-session? It is all here in 2022!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
+                        <div class="card card-2">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-3.png" alt="De Lakens mark">
+                            <div class="card__content">
+                                <h3>A New welcome</h3>
+                                <p>Our Reception building is being rebuilt and adjusted so that you'll feel more welcome than ever when you arrive next. The scaffolding is up now, but it will be all yours in good time!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
+                        <div class="card card-3">
+                            <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-3.png" alt="De Lakens mark">
+                            <div class="card__content">
+                                <h3>Back and Better: Beachcamp de Lakens!</h3>
+                                <p>Come to surf and to sleep in one of the lovely furnished glamping tents, and to enjoy diners, surfing equipment and activities. Or relax using facilities such as the hot tubs and the terrace. Especially good for families and those over 25.</p>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
