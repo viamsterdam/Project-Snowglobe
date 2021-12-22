@@ -179,6 +179,36 @@
         </div>
     </div>
 
+    <div id="footer" class="scene-footer">
+        <div class="scene-footer__inner">
+            <div class="scene-footer__logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-big.svg" alt="Site logo">
+            </div>
+            <div class="scene-footer__content content-block">
+                <p>Meteen boeken voor 2022</p>
+            </div>
+            <ul class="scene-footer__nav">
+                <li class="scene-footer__nav-item">
+                    <a href="#" class="scene-footer__nav-item__link">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-geversduin-color.svg" alt="Geversduin logo">
+                    </a>
+                </li>
+                <li class="scene-footer__nav-item">
+                    <a href="#" class="scene-footer__nav-item__link">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-bakkum-color.svg" alt="Bakkum logo">
+                    </a>
+                </li>
+                <li class="scene-footer__nav-item">
+                    <a href="#" class="scene-footer__nav-item__link">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-de-lakum-color.svg" alt="De Lakum logo">
+                    </a>
+                </li>
+            </ul>
+            <a href="#" class="button button--dark scene-footer__btn-start">Start over</a>
+            <a href="#" class="link-underline scene-footer__link">Visit our website</a>
+        </div>
+    </div>
+
     <div class="scene-bar">
 
         <?php /* Website link button */ ?>
