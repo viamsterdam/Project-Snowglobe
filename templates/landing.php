@@ -4,6 +4,7 @@
 
 ?>
 
+
 <?php get_header(); ?>
 
 <div id="loader" class="scene-loader">
@@ -15,19 +16,19 @@
         <span><span id="loader-value">0</span>%</span>
     </div>
 </div>
-
 <div id="scene" class="scene">
-    
-    <div class="scene__intro">
-        <div class="container">
-            <h2 class="title title--lg scene__intro__title">Take a peek at what holiday fun is coming!</h2>
-            <div class="content-block scene__intro__content">
-                <p>Are you curious what surprises we'll have for you next year? Take a peek at what we are doing now to make your stay even better. Will we see you in 2022?</p>
-                <p class="text--styled">Have a great Christmas & New Year!</p>
+    <?php
+    if( $intro ): ?>
+        <div class="scene__intro">
+            <div class="container">
+                <h2 class="title title--lg scene__intro__title"><?php echo $intro['title']; ?></h2>
+                <div class="content-block scene__intro__content">
+                    <p><?php echo $intro['content']; ?></p>
+                    <p class="text--styled"><?php echo $intro['subtext']; ?></p>
+                </div>
             </div>
         </div>
-    </div>
-
+    <?php endif; ?>
     <div id="sceneScrollOuter" class="scene-scroll-outer">
         <div id="sceneScrollInner" class="scene-scroll-inner">
             <div class="scene-item scene-item-1" data-index="1">
@@ -39,30 +40,57 @@
                             </h2>
                         </div>
                     </div>
+                    <?php
+                    if( have_rows('geversduin') ):
+                        while( have_rows('geversduin') ): the_row();
+                        $geversduin_intro = get_sub_field('intro');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
                         <div class="content-block">
-                            <h3>Welcome to Geversduin!</h3>
-                            <p>Discover the luxurious feeling of camping in the middle of nature here. Of course with lots of new surprises in 2022!</p>
+                            <h3><?php echo $geversduin_intro['title']; ?></h3>
+                            <p><?php echo $geversduin_intro['content']; ?></p>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('geversduin') ):
+                        while( have_rows('geversduin') ): the_row();
+                        $geversduin_first_card = get_sub_field('first_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="40">
                         <div class="card card-1">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-1.png" alt="Geversduin mark">
                             <div class="card__content">
-                                <h3>A fantastic new square!</h3>
-                                <p>The front square has been extended and newly refurbished, meaning more space and more fun for everyone. We hope to see you leisurely enjoying yourself here soon!</p>
+                                <h3><?php echo $geversduin_first_card['title']; ?></h3>
+                                <p><?php echo $geversduin_first_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('geversduin') ):
+                        while( have_rows('geversduin') ): the_row();
+                        $geversduin_second_card = get_sub_field('second_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
                         <div class="card card-2">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-1.png" alt="Geversduin mark">
                             <div class="card__content">
-                                <h3>New: Plastic House</h3>
-                                <p>Unique! Book a stay in one of the two holiday houses that we partially made from local waste plastic. The plastic was collected from the Castricum aan Zee beach. Super-green and still luxurious!</p>
+                                <h3><?php echo $geversduin_second_card['title']; ?></h3>
+                                <p><?php echo $geversduin_second_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
             </div>
             <div class="scene-item scene-item-2" data-index="2">
                     <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
@@ -73,39 +101,75 @@
                             </h2>
                         </div>
                     </div>
+                    <?php
+                    if( have_rows('bakkum') ):
+                        while( have_rows('bakkum') ): the_row();
+                        $bakkum_intro = get_sub_field('intro');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
                         <div class="content-block">
-                            <h3>Welcome to Bakkum!</h3>
-                            <p>Enjoying your own personal paradise together is the standard at Bakkum, because we always ask ourselves how we can make each season even better than the last!</p>
+                            <h3><?php echo $bakkum_intro['title']; ?></h3>
+                            <p><?php echo $bakkum_intro['content']; ?></h3></p>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('bakkum') ):
+                        while( have_rows('bakkum') ): the_row();
+                        $bakkum_first_card = get_sub_field('first_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="40">
                         <div class="card card-1">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-2.png" alt="Bakkum mark">
                             <div class="card__content">
-                                <h3>New! <br>Bakkum’s Musical Group</h3>
-                                <p>A new Musical Group where children rehearse for a whole month to put on the musical Bon Bonni Beach. Will it star your family's musical talent too?</p>
+                                <h3><?php echo $bakkum_first_card['title']; ?></h3>
+                                <p><?php echo $bakkum_first_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('bakkum') ):
+                        while( have_rows('bakkum') ): the_row();
+                        $bakkum_second_card = get_sub_field('second_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
                         <div class="card card-2">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-2.png" alt="Bakkum mark">
                             <div class="card__content">
-                                <h3>New:<br> Campervan Pitches de Luxe</h3>
-                                <p>A lovely sunny pitch for your campervan. Now with electricity, running water and a drain. Luxurious holiday enjoyment in 2022!</p>
+                                <h3><?php echo $bakkum_second_card['title']; ?></h3>
+                                <p><?php echo $bakkum_second_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('bakkum') ):
+                        while( have_rows('bakkum') ): the_row();
+                        $bakkum_third_card = get_sub_field('third_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
                         <div class="card card-3">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-2.png" alt="Bakkum mark">
                             <div class="card__content">
-                                <h3>Bakkum Vertelt: bigger and better!</h3>
-                                <p>Renewed! Bakkum Vertelt. The multi-day festival full of exciting, moving and festive stories, performances and music has undergone a facelift. Bigger and Better still in 2022! </p>
+                                <h3><?php echo $bakkum_third_card['title']; ?></h3>
+                                <p><?php echo $bakkum_third_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
             </div>
             <div class="scene-item scene-item-3" data-index="3">
                     <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
@@ -116,39 +180,75 @@
                             </h2>
                         </div>
                     </div>
+                    <?php
+                    if( have_rows('de_lakens') ):
+                        while( have_rows('de_lakens') ): the_row();
+                        $de_lakens_intro = get_sub_field('intro');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
                         <div class="content-block">
-                            <h3>Welcome to the Lakens</h3>
-                            <p>The campsite where enjoying yourself, being active and relaxing go hand in hand, only 100 metres from the beach at Bloemendaal. Come and take your dose of Sun and Sea with us and become as Zen as possible!</p>
+                            <h3><?php echo $de_lakens_intro['title']; ?></h3>
+                            <p><?php echo $de_lakens_intro['content']; ?></p>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('de_lakens') ):
+                        while( have_rows('de_lakens') ): the_row();
+                        $de_lakens_first_card = get_sub_field('first_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="40">
                         <div class="card card-1">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-3.png" alt="De Lakens mark">
                             <div class="card__content">
-                                <h3>New: Sun, Sea, Zen and…… <br>Sweat!</h3>
-                                <p>Before or after you spend loads of time unwinding, why not do that workout in our brand new building full of sports facilities? Or would you prefer to take your yoga-mat to a great relax-session? It is all here in 2022!</p>
+                                <h3><?php echo $de_lakens_first_card['title']; ?></h3>
+                                <p><?php echo $de_lakens_first_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('de_lakens') ):
+                        while( have_rows('de_lakens') ): the_row();
+                        $de_lakens_second_card = get_sub_field('second_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
                         <div class="card card-2">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-3.png" alt="De Lakens mark">
                             <div class="card__content">
-                                <h3>A New welcome</h3>
-                                <p>Our Reception building is being rebuilt and adjusted so that you'll feel more welcome than ever when you arrive next. The scaffolding is up now, but it will be all yours in good time!</p>
+                                <h3><?php echo $de_lakens_second_card['title']; ?></h3>
+                                <p><?php echo $de_lakens_second_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
+                    <?php
+                    if( have_rows('de_lakens') ):
+                        while( have_rows('de_lakens') ): the_row();
+                        $de_lakens_third_card = get_sub_field('third_card');
+                    ?>
                     <div class="scene-item__content-point scene-item__content-point--card" data-appear="70">
                         <div class="card card-3">
                             <img class="card__mark" src="<?php echo get_template_directory_uri(); ?>/assets/images/mark-3.png" alt="De Lakens mark">
                             <div class="card__content">
-                                <h3>Back and Better: Beachcamp de Lakens!</h3>
-                                <p>Come to surf and to sleep in one of the lovely furnished glamping tents, and to enjoy diners, surfing equipment and activities. Or relax using facilities such as the hot tubs and the terrace. Especially good for families and those over 25.</p>
+                                <h3><?php echo $de_lakens_third_card['title']; ?></h3>
+                                <p><?php echo $de_lakens_third_card['content']; ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php 
+                    endwhile;
+                    endif;
+                    ?>
             </div>
         </div>
     </div>
