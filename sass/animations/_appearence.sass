@@ -1,9 +1,9 @@
 .fade-up
 	transition: 0.7s ease-out
-	transform: translateY(30px)
+	transform: translate3d(0, 30px, 0)
 	opacity: 0
 	&.in
-		transform: translateY(0)
+		transform: translate3d(0, 0, 0)
 		opacity: 1
 
 .fade-in
@@ -14,19 +14,19 @@
 
 .zoom-in
 	transition: transform 0.7s ease-out 0s
-	transform: scale(1.1)
+	transform: scale3d(1.1, 1.1, 1.1)
 	&.in
-		transform: scale(1)
+		transform: scale3d(1, 1, 1)
 
 .fade-left
 	transition: 0.7s ease-out
 	opacity: 0
-	transform: translateX(30px)
+	transform: translate3d(30px, 0, 0)
 	+max-screen($breakpoint-md)
-		transform: translateX(15px)
+		transform: translate3d(15px, 0, 0)
 	.loaded:not(.loading) .animate.in &
 		opacity: 1
-		transform: translateX(0)
+		transform: translate3d(0, 0, 0)
 
 .delay
 	&-1
