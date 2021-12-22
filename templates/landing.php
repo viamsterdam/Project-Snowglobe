@@ -184,7 +184,7 @@
             <div class="scene-footer__logo">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-big.svg" alt="Site logo">
             </div>
-            <div class="scene-footer__content content-block">
+            <div class="scene-footer__content content-block font--quicksand">
                 <p>Meteen boeken voor 2022</p>
             </div>
             <ul class="scene-footer__nav">

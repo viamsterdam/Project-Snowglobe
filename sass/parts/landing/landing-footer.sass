@@ -1,7 +1,7 @@
 .scene-footer
     position: fixed
     z-index: 90
-    top: 0
+    top: 100%
     right: 0
     width: 100%
     height: 100%
@@ -9,11 +9,73 @@
     box-sizing: border-box
 
     background-color: #072A4D
-    padding-left: 90px
+    padding-left: 70px
     padding-bottom: 142px
     padding-top: 68px
-    padding-right: 30px
+    padding-right: 70px
+    .started &
+        top: 0
+    &:before
+        content: ''
+        position: absolute
+        bottom: 99%
+        left: 0
+        width: 100%
+        padding-bottom: 14%
+        background-image: url(../assets/images/footer-top.svg)
+        background-size: contain
+        background-repeat: no-repeat
+        background-position: bottom center
+
     &__inner
+        height: 100%
         display: flex
         flex-direction: column
-        padding-bottom: 36px
+        justify-content: flex-end
+        padding-bottom: 40px
+        box-sizing: border-box
+    &__logo
+        width: 176px
+        max-width: 40%
+        margin-bottom: 50px
+        img
+            width: 100%
+            height: auto
+    &__content
+        padding-bottom: 20px
+        p
+            font-weight: 500
+            font-size: 16px
+            line-height: 1.25em
+    &__nav
+        margin-bottom: 52px
+        li
+            padding: 18px 0
+            border-bottom: 1px solid rgba(255,255,255,0.3)
+            &:nth-last-child(1)
+                border-bottom: 0
+        &-item
+            &__link
+                display: inline-block
+                &:after
+                    content: ''
+                    display: inline-block
+                    width: 16px
+                    height: 16px
+                    background-image: url(../assets/images/icon-arrow-right.svg)
+                    background-position: center
+                    background-repeat: no-repeat
+                    background-size: contain
+                    margin-left: 14px
+                    margin-top: 4px
+                    transition: 0.3s
+                &:hover
+                    &::after
+                        margin-left: 22px
+                img
+                    height: 24px
+                    width: auto
+    &__btn-start
+        margin-bottom: 25px
+    &__link
+        align-self: center

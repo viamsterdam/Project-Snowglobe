@@ -18,6 +18,7 @@ class Scene {
         this.totalWidth = 0.973 * (3 * this.itemWidth);
 
         this.sceneBar = $('.scene-bar');
+        this.sceneFooter = $('#footer');
 
         this.sceneIntro = $('.scene__intro');
         this.startButton = $('#start-button');
@@ -98,6 +99,25 @@ class Scene {
             },
             ease: "none",
             left:  -that.totalWidth + that.screenWidth,
+        });
+
+        gsap.to(that.sceneFooter,{
+            scrollTrigger: {
+                id: "Footer",
+                trigger: that.sceneScrollInner,
+                scroller: that.sceneScrollOuter,
+                scrub: false,
+                pin: false,
+                start: "top top",
+                end: "bottom bottom",
+                markers: false,
+                invalidateOnRefresh: true,
+                toggleActions: "reverse play reverse reverse",
+                onUpdate: self => {
+                    
+                }
+            },
+            top:  '0%',
         });
         
         gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
