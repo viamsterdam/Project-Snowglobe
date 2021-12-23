@@ -106,13 +106,25 @@
             opacity: 1
         &__content-point
             position: fixed
-            top: 160px
-            left: 400px
             &--card
-                //display: none
                 left: 50%
                 margin-left: -190px
-            &--text
+            &--intro
+                width: 100%
+                top: 20vh
+                left: 0
+                padding: 0 27% 
+                +max-screen($breakpoint-md)
+                    padding: 0 30px
+            &--content
+                width: 100%
+                top: 20vh
+                left: 0
+                padding: 0 27%
+                +max-screen($breakpoint-md)
+                    top: 126px
+                    padding: 0 30px
+            &--intro, &--content
                 .content-block
                     max-width: 310px
                     h2

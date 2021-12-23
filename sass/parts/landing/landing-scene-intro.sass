@@ -11,18 +11,36 @@
         padding-top: 28vh
         display: flex
         justify-content: space-between
+        +max-screen($breakpoint-md)
+            padding-top: 21vh
+            flex-wrap: wrap
     
     &__title
-        max-width: 570px
+        max-width: 590px
+        padding-right: 20px
         transition: 0.5s ease-out
         .started &
             transform: translate3d(0, -20px, 0)
             opacity: 0
+        +max-screen($breakpoint-md)
+            padding-right: 0
+            width: 100%
     &__content
         max-width: 510px
         padding-top: 18px
         transition: 0.5s ease-out
         transition-delay: 0.2s
+        +max-screen($breakpoint-lg)
+            padding-top: 15px
         .started &
             transform: translate3d(0, -20px, 0)
             opacity: 0
+
+    &__start
+        margin-top: 26px
+        +max-screen($breakpoint-md)
+            display: none
+    &__content-typed
+        display: none
+        +max-screen($breakpoint-md)
+            display: inline-block

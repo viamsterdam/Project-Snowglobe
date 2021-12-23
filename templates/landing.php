@@ -13,7 +13,7 @@
     </div>
     <div class="scene-loader__txt">
         <span>Website loading ...</span>
-        <span><span id="loader-value">0</span>%</span>
+        <span class="scene-loader__txt__value"><span id="loader-value">0</span>%</span>
     </div>
 </div>
 <div id="scene" class="scene">
@@ -27,7 +27,10 @@
                 <h2 class="title title--lg scene__intro__title"><?php echo $intro['title']; ?></h2>
                 <div class="content-block scene__intro__content">
                     <p><?php echo $intro['content']; ?></p>
-                    <p class="text--styled"><?php echo $intro['subtext']; ?></p>
+                    <p class="scene__intro__content-typed text--styled"><?php echo $intro['subtext']; ?></p>
+                    <div class="scene__intro__start">
+                        <button class="button button--white js-scene-start"><?php _e('Start the journey!','snowglobe'); ?></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,7 +38,7 @@
     <div id="sceneScrollOuter" class="scene-scroll-outer">
         <div id="sceneScrollInner" class="scene-scroll-inner">
             <div class="scene-item scene-item-1" data-index="1">
-                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
+                    <div class="scene-item__content-point scene-item__content-point--intro" data-appear="200">
                         <div class="content-block">
                             <h2>
                                 <span class="text--styled">Camping</span>
@@ -48,7 +51,7 @@
                         while( have_rows('geversduin') ): the_row();
                         $geversduin_intro = get_sub_field('intro');
                     ?>
-                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
+                    <div class="scene-item__content-point scene-item__content-point--content" data-appear="20">
                         <div class="content-block">
                             <h3><?php echo $geversduin_intro['title']; ?></h3>
                             <p><?php echo $geversduin_intro['content']; ?></p>
@@ -96,7 +99,8 @@
                     ?>
             </div>
             <div class="scene-item scene-item-2" data-index="2">
-                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
+
+                    <div class="scene-item__content-point scene-item__content-point--intro" data-appear="200">
                         <div class="content-block">
                             <h2>
                                 <span class="text--styled">Camping</span>
@@ -104,12 +108,13 @@
                             </h2>
                         </div>
                     </div>
+
                     <?php
                     if( have_rows('bakkum') ):
                         while( have_rows('bakkum') ): the_row();
                         $bakkum_intro = get_sub_field('intro');
                     ?>
-                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
+                    <div class="scene-item__content-point scene-item__content-point--content" data-appear="20">
                         <div class="content-block">
                             <h3><?php echo $bakkum_intro['title']; ?></h3>
                             <p><?php echo $bakkum_intro['content']; ?></h3></p>
@@ -175,7 +180,7 @@
                     ?>
             </div>
             <div class="scene-item scene-item-3" data-index="3">
-                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="200">
+                    <div class="scene-item__content-point scene-item__content-point--intro" data-appear="200">
                         <div class="content-block">
                             <h2>
                                 <span class="text--styled">Camping</span>
@@ -188,7 +193,7 @@
                         while( have_rows('de_lakens') ): the_row();
                         $de_lakens_intro = get_sub_field('intro');
                     ?>
-                    <div class="scene-item__content-point scene-item__content-point--text" data-appear="20">
+                    <div class="scene-item__content-point scene-item__content-point--content" data-appear="20">
                         <div class="content-block">
                             <h3><?php echo $de_lakens_intro['title']; ?></h3>
                             <p><?php echo $de_lakens_intro['content']; ?></p>
@@ -324,7 +329,15 @@
 
         <?php /* Start button */ ?>
         <div class="scene-bar__start">
-            <button id="start-button" class="button"><?php _e('Start the journey!','snowglobe'); ?></button>
+            <?php 
+            $intro = get_field('intro'); 
+            if($intro['subtext']):
+                ?>
+                <p class="text--styled scene-bar__start__text"><?php echo $intro['subtext']; ?></p>
+            <?php endif; ?>
+
+            <button class="button js-scene-start"><?php _e('Start the journey!','snowglobe'); ?></button>
+
         </div>
 
         <?php /* Progress bar */ ?>

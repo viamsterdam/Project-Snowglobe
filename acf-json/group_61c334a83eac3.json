@@ -748,7 +748,8 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1640194362
+    "show_in_rest": 0,
+    "modified": 1640218345
 }

@@ -22,7 +22,7 @@ class Scene {
         this.sceneFooter = $('#footer');
 
         this.sceneIntro = $('.scene__intro');
-        this.startButton = $('#start-button');
+        this.startButton = $('.js-scene-start');
 
         this.soundButton = $('#sound-button');
         this.sound = $('#sound').get(0);
