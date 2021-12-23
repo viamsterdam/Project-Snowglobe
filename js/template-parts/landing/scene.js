@@ -118,8 +118,8 @@ class Scene {
                         this.nextSlide();
                     }
                     //console.log('num:', num);
-                } /*,
-                true*/
+                } ,
+                true
             )
         );
 
