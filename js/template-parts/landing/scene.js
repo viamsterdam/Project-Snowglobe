@@ -138,10 +138,10 @@ class Scene {
         this.bgColorAnimation.to(this.bgGlobal , { backgroundColor: '#F1AB79' } ).to(this.bgGlobal , { backgroundColor: '#13558C' } );
 
         this.barColorAnimation = new TimelineLite({paused:true});
-        this.barColorAnimation.to(this.sceneBar , { backgroundColor: '#2F2954' } ).to(this.bgGlobal , { backgroundColor: '#072A4D' } );
+        this.barColorAnimation.to(this.sceneBar , { backgroundColor: '#2F2954' } ).to(this.sceneBar , { backgroundColor: '#072A4D' } );
 
         this.progressColorAnimation = new TimelineLite({paused:true});
-        this.progressColorAnimation.to(this.progressCircle , { stroke: '#F1AB79' } ).to(this.bgGlobal , { stroke: '#13558C' } );
+        this.progressColorAnimation.to(this.progressCircle , { stroke: '#F1AB79' } ).to(this.progressCircle , { stroke: '#13558C' } );
         
     }
 
@@ -174,6 +174,10 @@ class Scene {
 
         //change logos
         this.logoChange();
+
+        if(this.currentPoint==14){
+            this.fireworks.play();
+        }
     }
 
     onProgressChange(){
@@ -536,6 +540,36 @@ class Scene {
             }
         });
         this.animationsArray.push(this.car);
+
+        this.snowWrapper = $('#snow');
+        this.snow = bodymovin.loadAnimation({
+            container: this.snowWrapper.get(0), // Required
+            path: this.snowWrapper.data('path'), // Required
+            renderer: 'svg', // Required
+            loop: true, // Optional
+            autoplay: true, // Optional
+            name: "Snow", // Name for future reference. Optional.
+            rendererSettings: {
+                
+            }
+        });
+        this.animationsArray.push(this.snow);
+
+        this.fireworksWrapper = $('#fireworks');
+        this.fireworks = bodymovin.loadAnimation({
+            container: this.fireworksWrapper.get(0), // Required
+            path: this.fireworksWrapper.data('path'), // Required
+            renderer: 'svg', // Required
+            loop: true, // Optional
+            autoplay: false, // Optional
+            name: "Fireworks", // Name for future reference. Optional.
+            rendererSettings: {
+                
+            }
+        });
+        this.animationsArray.push(this.fireworks);
+
+
 
         this.items.forEach(element => {
             //element.block.height(this.itemWidth);
