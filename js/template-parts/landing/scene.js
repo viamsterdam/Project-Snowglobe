@@ -106,9 +106,10 @@ class Scene {
         $('body').bind(
             'mousewheel', 
             throttle(
-                1000, 
+                2500, 
                 false, 
                 (e) => {
+                    e.stopPropagation();
                     if(e.originalEvent.wheelDelta /120 > 0) {
                         console.log('scrolling up !');
                         this.prevSlide();
@@ -118,8 +119,8 @@ class Scene {
                         this.nextSlide();
                     }
                     //console.log('num:', num);
-                } ,
-                true
+                } /*,
+                true*/
             )
         );
 
