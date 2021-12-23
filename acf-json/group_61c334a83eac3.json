@@ -765,7 +765,7 @@
         {
             "key": "field_61c42f2eb635a",
             "label": "Geversduin Link",
-            "name": "geversduin",
+            "name": "geversduin_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -780,7 +780,7 @@
         {
             "key": "field_61c42f48b635b",
             "label": "Bakkum Link",
-            "name": "bakkum",
+            "name": "bakkum_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -795,7 +795,7 @@
         {
             "key": "field_61c42f5eb635c",
             "label": "De Lakens Link",
-            "name": "de_lakens",
+            "name": "de_lakens_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -825,5 +825,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1640249091
+    "modified": 1640262342
 }
