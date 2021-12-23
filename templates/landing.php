@@ -29,7 +29,12 @@
                     <p><?php echo $intro['content']; ?></p>
                     <p class="scene__intro__content-typed text--styled"><?php echo $intro['subtext']; ?></p>
                     <div class="scene__intro__start">
-                        <button class="button button--white js-scene-start"><?php _e('Start the journey!','snowglobe'); ?></button>
+                        <button class="button button--white js-scene-start">
+                            <?php $start_button_text = get_field('start_button_text');
+                            if ( $start_button_text): ?>
+                            <?php _e($start_button_text,'snowglobe'); ?>
+                            <?php endif; ?>
+                        </button>
                     </div>
                 </div>
             </div>
