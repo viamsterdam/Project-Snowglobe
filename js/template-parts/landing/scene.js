@@ -112,7 +112,7 @@ class Scene {
         $('body').bind(
             'mousewheel', 
             throttle(
-                2500, 
+                2800, 
                 false, 
                 (e) => {
                     e.stopPropagation();
