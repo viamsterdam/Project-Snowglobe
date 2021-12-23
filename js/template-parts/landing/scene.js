@@ -292,7 +292,6 @@ class Scene {
                 this.muted = false;
                 this.sound.play();
                 this.soundButton.addClass('active');
-                
             }
         }
     }
@@ -302,6 +301,12 @@ class Scene {
 
         $('.header-logo__item').removeClass('active');
         $('.header-logo__item-'+1).addClass('active');
+
+        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
+            ease: "easein",
+            y: 0,
+            duration: 0.7
+        });
 
         this.car.play();
         this.playSound();
