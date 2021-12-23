@@ -261,8 +261,16 @@
 
                     <div class="scene-item__content-point scene-item__content-point--content" data-appear="98" data-animation="fade">
                         <div class="content-block">
-                            <h3>We wish you a fantastic New Year!</h3>
-                            <p>We hope to see you in 2022!</p>
+                        <?php
+                        $greeting_title = get_field('greeting_title');
+                        if ($greeting_title) : ?>
+                        <h3><?php echo $greeting_title ?> </h3>
+                        <?php endif; ?>
+                        <?php
+                        $greeting_text = get_field('greeting_text');
+                        if ($greeting_text) : ?>
+                        <p><?php echo $greeting_text ?> </p>
+                        <?php endif; ?>
                         </div>
                     </div>
             </div>
