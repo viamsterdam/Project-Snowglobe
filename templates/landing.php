@@ -50,7 +50,6 @@
                     if( have_rows('geversduin') ):
                         while( have_rows('geversduin') ): the_row();
                         $geversduin_intro = get_sub_field('intro');
-                        var_dump($geversduin_intro);
                     ?>
                     <div class="scene-item__content-point scene-item__content-point--content" data-appear="10" data-animation="fade">
                         <div class="content-block">
