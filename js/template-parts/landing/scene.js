@@ -160,10 +160,6 @@ class Scene {
 
         this.logoChange();
         this.lottieAnimations();
-
-        if(this.currentPoint==14){
-            this.fireworks.pause();
-        }
     }
 
     nextSlide(){
@@ -186,9 +182,6 @@ class Scene {
         this.logoChange();
         this.lottieAnimations();
 
-        if(this.currentPoint==14){
-            this.fireworks.play();
-        }
     }
 
     onProgressChange(){
@@ -267,6 +260,14 @@ class Scene {
             this.items[2].animation2.pause();
         }
         
+
+        if(this.currentPoint==14){
+            this.fireworksWrapper.fadeIn();
+            this.fireworks.play();
+        } else{
+            this.fireworksWrapper.fadeOut();
+            this.fireworks.pause();
+        }
     }
 
     initSound(){
