@@ -12,8 +12,14 @@ var scene = new Scene();
 scene.init();
 scene.load();
 
-scene.initFullScroll();
+//scene.initFullScroll();
 //scene.initScroll();
 //scene.initColors();
 scene.initSound();
+
+$('.js-scene-start').click(function(e){
+    scene.startScene();
+    scene.initFullScroll();
+});
+
 //scene.initContent();

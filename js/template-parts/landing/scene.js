@@ -44,6 +44,7 @@ class Scene {
         this.bgLayer5 = this.sceneBlock.find('.scene-bg-layer-5');
 
         $('.scene-item').each((index, element)=>{
+
             let item = {};
 
             item.block = $(element);                   //jquery object of scene item
@@ -57,10 +58,11 @@ class Scene {
                 let point = {};
                 point.block = $(this);
                 point.block.addClass('enter');
-                point.position = $(this).data('appear');
+                point.position = parseInt($(this).data('appear'));
                 point.animation = $(this).data('animation');
                 that.points.push(point);
             });
+
 
             item.bgLayer1 = this.sceneBlock.find('.scene-bg-layer-1 .scene-bg-layer__item[data-index="'+item.index+'"]');
             item.bgLayer2 = this.sceneBlock.find('.scene-bg-layer-2 .scene-bg-layer__item[data-index="'+item.index+'"]');
@@ -74,12 +76,12 @@ class Scene {
             position : 100,
             animation : 'footer'
         });
+
+        console.log(this.points);
        
     }
     init() {
-        
-        this.startButton.click((e)=>this.startScene(e));
-
+    
         this.resize();
         $(window).resize(this.resize.bind(this));
     
@@ -126,11 +128,11 @@ class Scene {
 
         $('body').on('swipeup',()=>{
             console.log('swipe up');
-            this.prevSlide();
+            this.nextSlide();
         });
         $('body').on('swipedown',()=>{
             console.log('swipe down');
-            this.nextSlide();
+            this.prevSlide();
         });
 
         
@@ -156,6 +158,12 @@ class Scene {
         this.points[oldPoint].block.removeClass('leave').addClass('enter').removeClass('active');
         this.points[this.currentPoint].block.addClass('leave').addClass('active');
 
+        this.logoChange();
+        this.lottieAnimations();
+
+        if(this.currentPoint==14){
+            this.fireworks.pause();
+        }
     }
 
     nextSlide(){
@@ -163,10 +171,11 @@ class Scene {
         this.currentPoint = this.currentPoint>=this.points.length?this.currentPoint:this.currentPoint+1;
 
         this.progress = 0.01*this.points[this.currentPoint].position;
+        
+
         this.onProgressChange();
 
         //previous animation
-        let that = this;
         this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
         this.points[this.currentPoint].block.addClass('enter').addClass('active');
         
@@ -175,6 +184,7 @@ class Scene {
 
         //change logos
         this.logoChange();
+        this.lottieAnimations();
 
         if(this.currentPoint==14){
             this.fireworks.play();
@@ -183,13 +193,13 @@ class Scene {
 
     onProgressChange(){
         gsap.to(this.bgGlobal,{ 
-            ease: "easein",
+            ease: "none",
             left:  this.progress * (-this.totalWidth + this.screenWidth) , 
             duration: 1
         });
 
         gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
-            ease: "easein",
+            ease: "none",
             xPercent: -this.progress*100,
             left: this.progress * this.totalWidth,
             duration: 1
@@ -223,253 +233,40 @@ class Scene {
         
     }
 
-
-    initScroll(){
-        let that = this;
-
-        gsap.to(that.bgGlobal,{
-            scrollTrigger: {
-                id: "Scene",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true,
-                onUpdate: self => {
-                    that.progress = self.progress;
-                    //console.log("progress:", self.progress);
-                }
-            },
-            ease: "none",
-            left:  -that.totalWidth + that.screenWidth,
-        });
-
-        gsap.to(that.sceneFooter,{
-            scrollTrigger: {
-                id: "Footer",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: false,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true,
-                toggleActions: "reverse play reverse reverse",
-                onUpdate: self => {
-                    
-                }
-            },
-            top:  '0%',
-        });
+    lottieAnimations(){
         
-        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
-            scrollTrigger: {
-                id: "Scene",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            x: '-100%',
-            left: that.totalWidth,
-        });
+        if(this.currentPoint>4){
+            this.items[0].animation1.pause();
+            this.items[0].animation2.pause();
+            this.items[0].animation2.pause();
+        } else{
+            this.items[0].animation1.play();
+            this.items[0].animation2.play();
+            this.items[0].animation2.play();
+        }
 
+        if(this.currentPoint>=3 && this.currentPoint<=9){
+            this.items[1].animation1.play();
+            this.items[1].animation2.play();
+            this.items[1].animation2.play();
+            
+        } else{
+            this.items[1].animation1.pause();
+            this.items[1].animation2.pause();
+            this.items[1].animation2.pause();
+        }
+
+        if(this.currentPoint>=8){
+            this.items[2].animation1.play();
+            this.items[2].animation2.play();
+            this.items[2].animation2.play();
+            
+        } else{
+            this.items[2].animation1.pause();
+            this.items[2].animation2.pause();
+            this.items[2].animation2.pause();
+        }
         
-    }
-
-    initColors(){
-        gsap.to(this.bgGlobal,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[0].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#F1AB79',
-        });
-        gsap.to(this.bgGlobal,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[1].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#13558C',
-        });
-
-        gsap.to(this.sceneBar,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[0].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#2F2954',
-        });
-        gsap.to(this.sceneBar,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[1].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#072A4D',
-        });
-    }
-
-    initScenesChange(){
-        this.items.forEach(( element , index ) => {
-
-            gsap.from(element.block ,{
-                scrollTrigger: {
-                    trigger: element.block,
-                    scroller: this.sceneScrollOuter,
-                    start: "-2% top",
-                    end: "bottom 95%",
-                    scrub: false,
-                    markers: false,
-                    onToggle: function(self){
-                        if(self.isActive){
-                            $('.header-logo__item').removeClass('active');
-                            $('.header-logo__item-'+(index+1)).addClass('active');
-
-                            element.animation1.play();
-                            element.animation2.play();
-                            element.animation3.play();
-
-                        } else{
-                            element.animation1.pause();
-                            element.animation2.pause();
-                            element.animation3.pause();
-                        }
-                    },
-                },        
-            });
-           
-        });
-    }
-
-    initContent(){
-
-        //first screen
-        this.items.forEach((element , indexBlock ) => {
-            if(element.points.length){
-                let that = this;
-
-                let tl1 = gsap.from( element.points[0].block ,{
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "-2% top",
-                      end: "20% 20%",
-                      scrub: false,
-                      markers: false,
-                      toggleActions: "play reverse play reverse",
-                      onUpdate: self => {
-                       
-                        //console.log("item progress "+indexBlock+"  first screen:", self.progress);
-        
-                      }
-                    },
-                    opacity: 0,
-                    y: 50
-                }); 
-                
-                let tl2 = gsap.from( element.points[1].block ,{
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "20% top",
-                      end: "40% 40%",
-                      scrub: false,
-                      markers: false,
-                      toggleActions: "play reverse play reverse",
-                      onUpdate: self => {
-                       
-                        //console.log("item progress" +index+ ":", self.progress);
-        
-                      }
-                    },
-                    duration: 1, 
-                    opacity: 0,
-                    y: 50
-                }); 
-
-
-                let tl = gsap.timeline({
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "40% top",
-                      end: "bottom 100%",
-                      scrub: true,
-                      markers: false,
-                      onUpdate: self => {
-                       
-                        //console.log("item progress" +indexBlock+ ":", self.progress);
-
-                      }
-                    }
-                });
-                let tl_end = gsap.timeline({
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "90% top",
-                      end: "bottom 95%",
-                      scrub: false,
-                      markers: false,
-                      toggleActions: "reverse play play reverse",
-                      onUpdate: self => {
-                       
-                        //console.log("item progress" +indexBlock+ ":", self.progress);
-
-                      }
-                    }
-                });
-                
-                element.points.forEach((point,index) => {
-                    if(index >=2 ){
-                        tl.from(point.block, {left: this.screenWidth + 200, rotation: 360, duration: 1});
-                        tl_end.to(point.block, {scale: 0.1, opacity: 0, duration: 0.2});
-                    }
-                });
-            }
-        });
-
     }
 
     initSound(){
@@ -487,27 +284,27 @@ class Scene {
             });
         }
     }
+
+    playSound(){
+        if(this.sound){
+            if(this.muted){
+                this.muted = false;
+                this.sound.play();
+                this.soundButton.addClass('active');
+                
+            }
+        }
+    }
     
     startScene(e){
         $('body').addClass('started');
 
         $('.header-logo__item').removeClass('active');
         $('.header-logo__item-'+1).addClass('active');
-        /*this.firstText = gsap.from( this.items[0].points[0].block ,{
-            opacity: 0,
-            y: 50
-        }).pause();
 
-        setTimeout(()=>{
-            this.startButton.hide();
-            this.sceneIntro.hide();
-            this.firstText.play();
-
-            this.initScenesChange();
-
-        },700);
-
-        this.car.play();*/
+        this.car.play();
+        this.playSound();
+        
     }
 
     load(){

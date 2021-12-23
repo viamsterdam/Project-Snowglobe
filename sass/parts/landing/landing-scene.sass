@@ -21,6 +21,12 @@
         pointer-events: none
 
         background-color: $scene-1-color
+        +max-screen($breakpoint-md)
+            height: calc(100% - 148px)
+            transition: 0.5s ease-out
+            .started &
+                height: calc(100% - 202px)
+
 
         &-layer
             display: flex
@@ -96,8 +102,13 @@
         max-width: 30%
         z-index: 5
         transition: 0.4s
+        +max-screen($breakpoint-md)
+            bottom: 200px
+            max-width: 50%
         .started &
             left: 68px
+            +max-screen($breakpoint-md)
+                left: 0
 
     #snow , #fireworks
         position: fixed
