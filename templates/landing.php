@@ -390,7 +390,14 @@
             ?>
             <p class="text--styled scene-bar__start__text"><?php echo $intro['subtext']; ?></p>
             <?php endif; ?>
-            <button class="button js-scene-start"><?php _e('Start the journey!','snowglobe'); ?></button>
+            <button class="button js-scene-start">
+                <?php 
+                $start_button_text = get_field('start_button_text'); 
+                if ($start_button_text) :
+                ?>
+                <?php _e($start_button_text,'snowglobe'); ?>
+                <?php endif; ?>
+            </button>
         </div>
 
         <?php /* Progress bar */ ?>
