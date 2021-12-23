@@ -391,19 +391,19 @@
             </button>
             <ul class="language-bar__list">
                 <li class="language-bar__item">
-                    <a href="#" class="language-bar__item__link">
+                    <a href="https://www.happykdcxmas.nl/" class="language-bar__item__link">
                         <span class="language-bar__item__flag"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHHSURBVHgBvZZNTsJAFMf/rxr8SEw4gSkb0ZUaD4DuJQEuILg3cAPKCfQEAitXQg1x5QI8gexANoxrF9SNCRI6vpZvtHzZ+kug7XQ6v3lvZtohLEgN+yofTgHTOoJALRPyjaBUD1AX856nWTdfoPq34UuaoBRX9DvXlFW+fxNEI7+0qI5gUgLabMEPhAQlOMLKXJEVxRY2snwawYoQpMbRZcbLlOlKW/CV/yKx4Ki0V+ylHUUNBK+5P0dwgb7sYnA9TB3PqjiHnIWLcOPGJ9qBYwhDGRXKNFyGJ5N/E75UXwo0TyIRZWenCC9YXzd2n24DPbOUOekt8UHqQvCWELHNWpAteEvVimiZlb8qfgX/hCUy4D1CISJLJOAtYpC6Z3iA7P+Yir1gtbvaqXhvl+ER2avDwOgzESs1+UWhwn1yKJwnRrPORAKuI5swO/Z3aSTSwxVIMw83IcpAj4pJkd2BbopHrwpXkBncnw87PinSowZk54y7omN1pC0phLXxQuddUKzEFSmJxV9RlkDwWF/awzDFzO0WIkUVtKZxrkMOM1L2/ytQ6AHdr7ydlV+YLZqQPvJeoqtyg709BSktHtMPmF3dqfFxvgGWj+nE6XV3pAAAAABJRU5ErkJggg==" alt="NL Flag"></span>
                         <span class="language-bar__item__txt">NL</span>
                     </a>
                 </li>
                 <li class="language-bar__item">
-                    <a href="#" class="language-bar__item__link">
+                    <a href="https://www.happykdcxmas.nl/de/" class="language-bar__item__link">
                         <span class="language-bar__item__flag"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGKSURBVHgBvZVLTsMwEIZnHB4tRSgcAMlLJBZNbhCQkLqDnqDcgMcFKNyAE3CElh3qpmWFxCblBA0nSBFICFAzTEJCUyBR09r9oz+2E2m+2J5xEIpJss3YofrsISiSw75m+2z6x278XsKMctjdjOBZLgw8LghIe8C2poGczwFJu7EISGg/a2ZSISS9jFGGGilQC+bInAyFkHd2L3lgASifTXoJYSm8PexsnSBokwkjckTYQ8AqaBQJOBRxd6q8nxkEKMX9tpSgWQKhKmBBEqWSutM3R56w+x6DUCssIHhOkqEPGmUgtqI6qljrNysbhgOa9NJ9vYvq1HcdcxWXB1xPJigWEbTX7E49WrpNuzdEwivQIARxGrY/6V22O01SvFecBBdl+9abAEV0MurceKBAvCduhT8+GU+AIjqJ3flh1F2lj71f4L96c2sygKDJR0cDChL4uiynZpILGgP3jyCCoZMb/DtQm0icJXtSCDQG1iSK0QESWEH8F+ZS8AOiJx4/VuCzjZy5eTG+AAON1VhxurisAAAAAElFTkSuQmCC" alt="DE Flag"></span>
                         <span class="language-bar__item__txt">DE</span>
                     </a>
                 </li>
                 <li class="language-bar__item">
-                    <a href="#" class="language-bar__item__link">
+                    <a href="https://www.happykdcxmas.nl/en/" class="language-bar__item__link">
                         <span class="language-bar__item__flag"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAQCSURBVHgBvZZ/TFtVFMe/rz9YrTS8dh0rIIwNl8kyZsyCGrJImcnYMphAwkyIxkZ0KhGXxUUzlUglJOgfpm4JbDEgxEQdG5uuzKEmMHUm/gCTCYhSTTs2B2OlfR2Flj7eu773WGtLW1pM9PtHX2/POfdzT++55z4KSWpqaiqd+/hi0dxrlmzCsjqoUpzp1wZGaZoepCjKmyhesaK14hytUinrOE5WMe1FoWFzDniff8nm9UEAoO3zcaCy9xJk6ERPWVe8qWTxDMrqvkMyudLuD6CZ5fhCrCQKRhABVGW15zzTvyMpkN3UqBpqaPsgUyu38AQ0ViUqt/Ih3aDL5XojISj1yd2nU4+1m7ozHNigX4PV6NDee2CuzgW5frPJlmN8My6o6dTIu8odW8t0vW2gLSfRu/Ea8jPVSEZBCDcxCVfZCwhU7GksPDLwRBRovemrmoZTjsMtn01AWbAZIiylpRWda/9MmFkMCOrTdmLQPndcLKgI0M3b/mbxKYLCYcHM0tSxC7R0uy4KUntXEfpHGRBxj+XKwyGQoqq3RNzIYPBymJhZqnM6JmitRhmZCb0T39tu/+NA8JKYlbTM4m30U7M+LmKC/hE3HszTYNcdGJWmEX6djALxnlnMvtUK9cEDOJ5eBK/NI8WFic7WpjxGid/cbvcfwuHLQwIFLg8JK68LjQ3MD0hGhJB26q+DjWouhZpLJoCfcsJ/5svQWP1iDZJSgB2ixnBfLgVix38rhwz/kxR+WsVoH3k4KWdO+OvYH4dDY9X+kqTiyCI3LRUDwzC3hIc+UcC/KQYifZCPpPKu7xwf8C2Q6uVOz+7KwLYvrOBdHmhefz7mROywDfIcA2RC+Tf1OHDVuRDlY0hbc1ECfXh5phU8FwES20p+RzvmL3wtnSPIY2/n4vA4PHVmycdUnIEDllGM3ZgP2YUrCwaa+nYp+szeSxQoRzjkyO99WLgD8erXwTO/GBMU2L8bii0bpc6QpQzA+moBcsN6o9CGOifb910NLTODVhwNQl7++Rz83X0ShM9aj8ff+zUu6MIVF07sqw3BdJwP1le2Y6vQ9WXCuQHPmkW/EOhGR+kn9aWZZ5dnUv7OSGTviqEW63W0GWsgF2HldchSLOC8kNmWrLsb8GmlIwIk6unnqmr95wd+C88kESSot/tncFLILAijGWfz2LGS5qA9AvQAHIzmm65iRqsffLTpStKQ8MxOGGuIMv/eFn1BfsR1HlVKBoNhOi97XeEvE16zXEYRrELCnrg7fvJUb+i2HI2yxY06W97ILQY2gfBdAnAyjpe4EKKUwyY8zDzHbrrVtacnluPK73VLG2kSb6rs991G1s/eT0C0IQohjhlm/jv2dJkNCfQ3Dse6fRwCDMUAAAAASUVORK5CYII=" alt="EN Flag"></span>
                         <span class="language-bar__item__txt">EN</span>
                     </a>
