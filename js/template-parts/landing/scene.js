@@ -44,6 +44,7 @@ class Scene {
         this.bgLayer5 = this.sceneBlock.find('.scene-bg-layer-5');
 
         $('.scene-item').each((index, element)=>{
+
             let item = {};
 
             item.block = $(element);                   //jquery object of scene item
@@ -57,10 +58,11 @@ class Scene {
                 let point = {};
                 point.block = $(this);
                 point.block.addClass('enter');
-                point.position = $(this).data('appear');
+                point.position = parseInt($(this).data('appear'));
                 point.animation = $(this).data('animation');
                 that.points.push(point);
             });
+
 
             item.bgLayer1 = this.sceneBlock.find('.scene-bg-layer-1 .scene-bg-layer__item[data-index="'+item.index+'"]');
             item.bgLayer2 = this.sceneBlock.find('.scene-bg-layer-2 .scene-bg-layer__item[data-index="'+item.index+'"]');
@@ -74,12 +76,12 @@ class Scene {
             position : 100,
             animation : 'footer'
         });
+
+        console.log(this.points);
        
     }
     init() {
-        
-        this.startButton.click((e)=>this.startScene(e));
-
+    
         this.resize();
         $(window).resize(this.resize.bind(this));
     
@@ -93,43 +95,143 @@ class Scene {
         this.totalWidth = 0.973 * (3 * this.itemWidth);
 
         this.bgLayer1.width(this.totalWidth);
+        this.bgLayer2.width(this.totalWidth * 0.92);
+        this.bgLayer3.width(this.totalWidth * 0.74);
+        this.bgLayer4.width(this.totalWidth * 0.51);
+        this.bgLayer5.width(this.totalWidth * 0.32);
 
         this.items.forEach(element => {
-
             element.bgLayer1.width(this.itemWidth);
-        
         });
+
+        this.onProgressChange();
     }
 
     initFullScroll(){
+        var that = this;
+        var g_supportsPassive = false;
+        try {
+          var opts = Object.defineProperty({}, 'passive', {
+            get: function() {
+              g_supportsPassive = true;
+            }
+          });
+          window.addEventListener("testPassive", null, opts);
+          window.removeEventListener("testPassive", null, opts);
+        } catch (e) {}
 
-        $('body').bind(
-            'mousewheel', 
-            throttle(
-                1000, 
-                false, 
-                (e) => {
-                    if(e.originalEvent.wheelDelta /120 > 0) {
-                        console.log('scrolling up !');
-                        this.prevSlide();
+        var scrollings = [];
+        /**
+        * Gets the average of the last `number` elements of the given array.
+        */
+       function getAverage(elements, number){
+            var sum = 0;
+
+            //taking `number` elements from the end to make the average, if there are not enought, 1
+            var lastElements = elements.slice(Math.max(elements.length - number, 1));
+
+            for(var i = 0; i < lastElements.length; i++){
+                sum = sum + lastElements[i];
+            }
+
+            return Math.ceil(sum/number);
+        }
+
+        var prevTime = new Date().getTime();
+
+        function MouseWheelHandler(e) {
+            var curTime = new Date().getTime();
+            var isNormalScroll = false;
+
+            if(true){
+                // cross-browser wheel delta
+                e = e || window.event;
+                var value = e.wheelDelta || -e.deltaY || -e.detail;
+                var delta = Math.max(-1, Math.min(1, value));
+
+                var horizontalDetection = typeof e.wheelDeltaX !== 'undefined' || typeof e.deltaX !== 'undefined';
+                var isScrollingVertically = (Math.abs(e.wheelDeltaX) < Math.abs(e.wheelDelta)) || (Math.abs(e.deltaX ) < Math.abs(e.deltaY) || !horizontalDetection);
+
+                //Limiting the array to 150 (lets not waste memory!)
+                if(scrollings.length > 149){
+                    scrollings.shift();
+                }
+
+                //keeping record of the previous scrollings
+                scrollings.push(Math.abs(value));
+
+
+                //time difference between the last scroll and the current one
+                var timeDiff = curTime-prevTime;
+                prevTime = curTime;
+
+                //haven't they scrolled in a while?
+                //(enough to be consider a different scrolling action to scroll another section)
+                if(timeDiff > 200){
+                    //emptying the array, we dont care about old scrollings for our averages
+                    scrollings = [];
+                }
+
+                if(scrollings.length == 0){
+                    var averageEnd = getAverage(scrollings, 10);
+                    var averageMiddle = getAverage(scrollings, 70);
+                    var isAccelerating = averageEnd >= averageMiddle;
+
+                    //to avoid double swipes...
+                    if(isAccelerating && isScrollingVertically){
+                        //scrolling down?
+                        if (delta < 0) {
+                            console.log('down');
+                            that.nextSlide();
+                        //scrolling up?
+                        }else {
+                            console.log('up');
+                            that.prevSlide();
+                        }
                     }
-                    else{
-                        console.log('scrolling down !');
-                        this.nextSlide();
-                    }
-                    //console.log('num:', num);
-                } ,
-                true
-            )
-        );
+                }
+
+                return false;
+            }
+
+        }
+        function addMouseWheelHandler(){
+            var prefix = '';
+            var _addEventListener;
+
+            if (window.addEventListener){
+                _addEventListener = "addEventListener";
+            }else{
+                _addEventListener = "attachEvent";
+                prefix = 'on';
+            }
+
+            // detect available wheel event
+            var support = 'onwheel' in document.createElement('div') ? 'wheel' : // Modern browsers support "wheel"
+                      document.onmousewheel !== undefined ? 'mousewheel' : // Webkit and IE support at least "mousewheel"
+                      'DOMMouseScroll'; // let's assume that remaining browsers are older Firefox
+            var passiveEvent = g_supportsPassive ? {passive: false }: false;
+
+            if(support == 'DOMMouseScroll'){
+                document[ _addEventListener ](prefix + 'MozMousePixelScroll', MouseWheelHandler, passiveEvent);
+            }
+
+            //handle MozMousePixelScroll in older Firefox
+            else{
+                document[ _addEventListener ](prefix + support, MouseWheelHandler, passiveEvent);
+            }
+        }
+
+        addMouseWheelHandler();
+
 
         $('body').on('swipeup',()=>{
             console.log('swipe up');
-            this.prevSlide();
+            this.nextSlide();
         });
         $('body').on('swipedown',()=>{
             console.log('swipe down');
-            this.nextSlide();
+            this.prevSlide();
         });
 
         
@@ -155,6 +257,8 @@ class Scene {
         this.points[oldPoint].block.removeClass('leave').addClass('enter').removeClass('active');
         this.points[this.currentPoint].block.addClass('leave').addClass('active');
 
+        this.logoChange();
+        this.lottieAnimations();
     }
 
     nextSlide(){
@@ -162,11 +266,14 @@ class Scene {
         this.currentPoint = this.currentPoint>=this.points.length?this.currentPoint:this.currentPoint+1;
 
         this.progress = 0.01*this.points[this.currentPoint].position;
+        
+
         this.onProgressChange();
 
         //previous animation
-        let that = this;
-        this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+        if(this.currentPoint!=15){
+            this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+        }
         this.points[this.currentPoint].block.addClass('enter').addClass('active');
         
         //gsap.to( that.points[oldPoint].block, {opacity: 0, y: -20 , duration: 0.2 });
@@ -174,28 +281,28 @@ class Scene {
 
         //change logos
         this.logoChange();
+        this.lottieAnimations();
 
-        if(this.currentPoint==14){
-            this.fireworks.play();
-        }
     }
 
     onProgressChange(){
-        gsap.to(this.bgGlobal,{ 
-            ease: "easein",
-            left:  this.progress * (-this.totalWidth + this.screenWidth) , 
+
+        gsap.to($('.scene-bg-layer-1'),{
+            ease: "easeout",
+            xPercent: -this.progress*100,
+            left: this.progress*this.screenWidth,
             duration: 1
         });
 
         gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
-            ease: "easein",
+            ease: "easeout",
             xPercent: -this.progress*100,
-            left: this.progress * this.totalWidth,
+            left: this.progress*this.screenWidth,
             duration: 1
         });
 
         gsap.to(this.progressCircle,{
-            ease: "easein",
+            ease: "easeout",
             strokeDashoffset: this.progressCircleLength - (this.progressCircleLength * this.progress),
             duration: 1
         });
@@ -215,260 +322,57 @@ class Scene {
         } else if(this.currentPoint >= 4 && this.currentPoint<=8){
             $('.header-logo__item').removeClass('active');
             $('.header-logo__item-'+2).addClass('active');
-        } else if(this.currentPoint >= 9){
+        } else if(this.currentPoint >= 9 && this.currentPoint < 14){
             $('.header-logo__item').removeClass('active');
             $('.header-logo__item-'+3).addClass('active');
+        } else if(this.currentPoint >= 14){
+            $('.header-logo__item').removeClass('active');
         } 
         
     }
 
-
-    initScroll(){
-        let that = this;
-
-        gsap.to(that.bgGlobal,{
-            scrollTrigger: {
-                id: "Scene",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true,
-                onUpdate: self => {
-                    that.progress = self.progress;
-                    //console.log("progress:", self.progress);
-                }
-            },
-            ease: "none",
-            left:  -that.totalWidth + that.screenWidth,
-        });
-
-        gsap.to(that.sceneFooter,{
-            scrollTrigger: {
-                id: "Footer",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: false,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true,
-                toggleActions: "reverse play reverse reverse",
-                onUpdate: self => {
-                    
-                }
-            },
-            top:  '0%',
-        });
+    lottieAnimations(){
         
-        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
-            scrollTrigger: {
-                id: "Scene",
-                trigger: that.sceneScrollInner,
-                scroller: that.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            x: '-100%',
-            left: that.totalWidth,
-        });
+        if(this.currentPoint>4){
+            this.items[0].animation1.pause();
+            this.items[0].animation2.pause();
+            this.items[0].animation2.pause();
+        } else{
+            this.items[0].animation1.play();
+            this.items[0].animation2.play();
+            this.items[0].animation2.play();
+        }
 
+        if(this.currentPoint>=3 && this.currentPoint<=9){
+            this.items[1].animation1.play();
+            this.items[1].animation2.play();
+            this.items[1].animation2.play();
+            
+        } else{
+            this.items[1].animation1.pause();
+            this.items[1].animation2.pause();
+            this.items[1].animation2.pause();
+        }
+
+        if(this.currentPoint>=8){
+            this.items[2].animation1.play();
+            this.items[2].animation2.play();
+            this.items[2].animation2.play();
+            
+        } else{
+            this.items[2].animation1.pause();
+            this.items[2].animation2.pause();
+            this.items[2].animation2.pause();
+        }
         
-    }
 
-    initColors(){
-        gsap.to(this.bgGlobal,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[0].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#F1AB79',
-        });
-        gsap.to(this.bgGlobal,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[1].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#13558C',
-        });
-
-        gsap.to(this.sceneBar,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[0].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#2F2954',
-        });
-        gsap.to(this.sceneBar,{
-            scrollTrigger: {
-                id: "Scene Background",
-                trigger: this.items[1].block,
-                scroller: this.sceneScrollOuter,
-                scrub: true,
-                pin: false,
-                start: "top top",
-                end: "bottom bottom",
-                markers: false,
-                invalidateOnRefresh: true
-            },
-            ease: "none",
-            backgroundColor: '#072A4D',
-        });
-    }
-
-    initScenesChange(){
-        this.items.forEach(( element , index ) => {
-
-            gsap.from(element.block ,{
-                scrollTrigger: {
-                    trigger: element.block,
-                    scroller: this.sceneScrollOuter,
-                    start: "-2% top",
-                    end: "bottom 95%",
-                    scrub: false,
-                    markers: false,
-                    onToggle: function(self){
-                        if(self.isActive){
-                            $('.header-logo__item').removeClass('active');
-                            $('.header-logo__item-'+(index+1)).addClass('active');
-
-                            element.animation1.play();
-                            element.animation2.play();
-                            element.animation3.play();
-
-                        } else{
-                            element.animation1.pause();
-                            element.animation2.pause();
-                            element.animation3.pause();
-                        }
-                    },
-                },        
-            });
-           
-        });
-    }
-
-    initContent(){
-
-        //first screen
-        this.items.forEach((element , indexBlock ) => {
-            if(element.points.length){
-                let that = this;
-
-                let tl1 = gsap.from( element.points[0].block ,{
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "-2% top",
-                      end: "20% 20%",
-                      scrub: false,
-                      markers: false,
-                      toggleActions: "play reverse play reverse",
-                      onUpdate: self => {
-                       
-                        //console.log("item progress "+indexBlock+"  first screen:", self.progress);
-        
-                      }
-                    },
-                    opacity: 0,
-                    y: 50
-                }); 
-                
-                let tl2 = gsap.from( element.points[1].block ,{
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "20% top",
-                      end: "40% 40%",
-                      scrub: false,
-                      markers: false,
-                      toggleActions: "play reverse play reverse",
-                      onUpdate: self => {
-                       
-                        //console.log("item progress" +index+ ":", self.progress);
-        
-                      }
-                    },
-                    duration: 1, 
-                    opacity: 0,
-                    y: 50
-                }); 
-
-
-                let tl = gsap.timeline({
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "40% top",
-                      end: "bottom 100%",
-                      scrub: true,
-                      markers: false,
-                      onUpdate: self => {
-                       
-                        //console.log("item progress" +indexBlock+ ":", self.progress);
-
-                      }
-                    }
-                });
-                let tl_end = gsap.timeline({
-                    scrollTrigger: {
-                      trigger: element.block,
-                      scroller: this.sceneScrollOuter,
-                      start: "90% top",
-                      end: "bottom 95%",
-                      scrub: false,
-                      markers: false,
-                      toggleActions: "reverse play play reverse",
-                      onUpdate: self => {
-                       
-                        //console.log("item progress" +indexBlock+ ":", self.progress);
-
-                      }
-                    }
-                });
-                
-                element.points.forEach((point,index) => {
-                    if(index >=2 ){
-                        tl.from(point.block, {left: this.screenWidth + 200, rotation: 360, duration: 1});
-                        tl_end.to(point.block, {scale: 0.1, opacity: 0, duration: 0.2});
-                    }
-                });
-            }
-        });
-
+        if(this.currentPoint>=14){
+            this.fireworksWrapper.fadeIn();
+            this.fireworks.play();
+        } else{
+            this.fireworksWrapper.fadeOut();
+            this.fireworks.pause();
+        }
     }
 
     initSound(){
@@ -486,27 +390,32 @@ class Scene {
             });
         }
     }
+
+    playSound(){
+        if(this.sound){
+            if(this.muted){
+                this.muted = false;
+                this.sound.play();
+                this.soundButton.addClass('active');
+            }
+        }
+    }
     
     startScene(e){
         $('body').addClass('started');
 
         $('.header-logo__item').removeClass('active');
         $('.header-logo__item-'+1).addClass('active');
-        /*this.firstText = gsap.from( this.items[0].points[0].block ,{
-            opacity: 0,
-            y: 50
-        }).pause();
 
-        setTimeout(()=>{
-            this.startButton.hide();
-            this.sceneIntro.hide();
-            this.firstText.play();
+        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
+            ease: "easein",
+            y: 0,
+            duration: 0.7
+        });
 
-            this.initScenesChange();
-
-        },700);
-
-        this.car.play();*/
+        this.car.play();
+        this.playSound();
+        
     }
 
     load(){
@@ -651,6 +560,7 @@ class Scene {
         this.items[0].animation2.play();
         this.items[0].animation3.play();
     }
+
 }
 
 export { Scene };

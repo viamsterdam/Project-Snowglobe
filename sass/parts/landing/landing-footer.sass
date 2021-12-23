@@ -13,22 +13,36 @@
     padding-bottom: 142px
     padding-top: 68px
     padding-right: 70px
+    +max-screen($breakpoint-md)
+        max-width: 100%
+        height: auto
+        width: 100%
+        //z-index: 100
+        padding-bottom: 36px
+        padding-left: 30px
+        padding-right: 30px
+        padding-top: 16px
+        transform: translateY(15%)
     .started &
         top: 100%
         transition: 0.8s ease-out
         &.active
             top: 0
+            z-index: 100
+            +max-screen($breakpoint-md)
+                top: 100%
+                transform: translateY(-100%)
     &:before
         content: ''
         position: absolute
         bottom: 99%
-        left: 0
-        width: 100%
+        left: -1px
+        width: 101%
         padding-bottom: 14%
         background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzc2IiBoZWlnaHQ9IjUxIiB2aWV3Qm94PSIwIDAgMzc2IDUxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMzc1LjM4MSA0LjAxMTc2VjUwLjVIMC4zODA4NTlWMTEuMTM4NkMxMjQuNzQ0IC0zNi4zMjU2IDE5NC44NjEgOTkuNzg2MiAzNzUuMzgxIDQuMDExNzZaIiBmaWxsPSIjMDcyQTREIi8+Cjwvc3ZnPgo=')
-        background-size: contain
+        background-size: cover
         background-repeat: no-repeat
-        background-position: bottom center
+        background-position: top center
 
     &__inner
         height: 100%
@@ -37,24 +51,34 @@
         justify-content: flex-end
         padding-bottom: 40px
         box-sizing: border-box
+        +max-screen($breakpoint-md)
+            padding-bottom: 0
     &__logo
         width: 176px
-        max-width: 40%
+        max-width: 30%
         margin-bottom: 50px
+        +max-screen($breakpoint-sm)
+            margin-bottom: 30px
         img
             width: 100%
             height: auto
     &__content
         padding-bottom: 20px
+        +max-screen($breakpoint-sm)
+            padding-bottom: 8px
         p
             font-weight: 500
             font-size: 16px
             line-height: 1.25em
     &__nav
         margin-bottom: 52px
+        +max-screen($breakpoint-sm)
+            margin-bottom: 20px
         li
             padding: 18px 0
             border-bottom: 1px solid rgba(255,255,255,0.3)
+            +max-screen($breakpoint-sm)
+                padding: 14px 0
             &:nth-last-child(1)
                 border-bottom: 0
         &-item
@@ -78,6 +102,8 @@
                 img
                     height: 24px
                     width: auto
+                    +max-screen($breakpoint-sm)
+                        height: 18px
     &__btn-start
         margin-bottom: 25px
     &__link

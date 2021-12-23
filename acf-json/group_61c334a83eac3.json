@@ -3,6 +3,82 @@
     "title": "Landing Page",
     "fields": [
         {
+            "key": "field_61c49e49f29b2",
+            "label": "Website loading",
+            "name": "website_loading",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_61c46c4581b81",
+            "label": "Scroll Text",
+            "name": "scroll_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_61c4975717ca9",
+            "label": "Start button text",
+            "name": "start_button_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_61c49c9c8dc12",
+            "label": "Music",
+            "name": "music",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_61c3495ec895e",
             "label": "Intro",
             "name": "intro",
@@ -765,7 +841,7 @@
         {
             "key": "field_61c42f2eb635a",
             "label": "Geversduin Link",
-            "name": "geversduin",
+            "name": "geversduin_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -780,7 +856,7 @@
         {
             "key": "field_61c42f48b635b",
             "label": "Bakkum Link",
-            "name": "bakkum",
+            "name": "bakkum_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -795,7 +871,7 @@
         {
             "key": "field_61c42f5eb635c",
             "label": "De Lakens Link",
-            "name": "de_lakens",
+            "name": "de_lakens_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -806,6 +882,63 @@
                 "id": ""
             },
             "return_format": "array"
+        },
+        {
+            "key": "field_61c482fcaa47d",
+            "label": "Footer book text",
+            "name": "footer_book_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_61c48ebe15f7f",
+            "label": "Greeting title",
+            "name": "greeting_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_61c48ecd15f80",
+            "label": "Greeting text",
+            "name": "greeting_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -825,5 +958,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1640249091
+    "modified": 1640275552
 }
