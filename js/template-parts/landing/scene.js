@@ -100,6 +100,10 @@ class Scene {
         this.bgLayer4.width(this.totalWidth * 0.51);
         this.bgLayer5.width(this.totalWidth * 0.32);
 
+        this.items.forEach(element => {
+            element.bgLayer1.width(this.itemWidth);
+        });
+
         this.onProgressChange();
     }
 
