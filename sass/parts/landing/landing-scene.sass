@@ -8,8 +8,7 @@
             left: 0
             width: 100%
             height: 100%
-            overflow-y: scroll
-            z-index: 1
+            z-index: 10
         &-inner
             display: block
     &-bg
@@ -101,19 +100,34 @@
             left: 68px
 
     &-item
-        opacity: 0
-        .started &
-            opacity: 1
+       
         &__content-point
             position: fixed
+            opacity: 0
             &--card
+                top: 18vh
                 left: 50%
                 margin-left: -190px
+                +max-screen($breakpoint-md)
+                    top: 16.5vh
+                    margin-left: -158px
+                .started &
+                    opacity: 0
+                    transition: 0.5s ease-out
+                    &.leave
+                        transform: translateX(-50%) rotate(-30deg)
+                    &.enter
+                        transform: translateX(50%) rotate(30deg)
+                    &.active
+                        transition-delay: 0.8s
+                        opacity: 1
+                        transform: translateX(0)
             &--intro
                 width: 100%
                 top: 20vh
                 left: 0
                 padding: 0 27% 
+                box-sizing: border-box
                 +max-screen($breakpoint-md)
                     padding: 0 30px
             &--content
@@ -121,10 +135,23 @@
                 top: 20vh
                 left: 0
                 padding: 0 27%
+                box-sizing: border-box
                 +max-screen($breakpoint-md)
                     top: 126px
                     padding: 0 30px
             &--intro, &--content
+                .started &
+                    opacity: 0
+                    transition: 0.5s ease-out
+                    &.leave
+                        transform: translateY(-30px)
+                    &.enter
+                        transform: translateY(30px)
+                    &.active
+                        transition-delay: 0.8s
+                        opacity: 1
+                        transform: translateY(0)
+
                 .content-block
                     max-width: 310px
                     h2

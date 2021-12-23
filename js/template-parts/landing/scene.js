@@ -1,10 +1,11 @@
 import $  from 'jquery';
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap , TimelineLite} from "gsap";
 import bodymovin from 'lottie-web/build/player/lottie_svg.min.js';
 import bodymovinCanvas from 'lottie-web/build/player/lottie_canvas.min.js';
+import { throttle } from 'throttle-debounce';
 
-gsap.registerPlugin(ScrollTrigger);
+const loadTouchEvents = require('jquery-touch-events');
+loadTouchEvents($);
 
 class Scene {
     constructor() {
@@ -15,9 +16,6 @@ class Scene {
         this.sceneScrollOuter = this.sceneBlock.find('#sceneScrollOuter');
         this.sceneScrollInner = this.sceneBlock.find('#sceneScrollInner');
 
-        this.itemWidth = this.screenHeight*0.5 / 0.1385;
-        this.totalWidth = 0.973 * (3 * this.itemWidth);
-
         this.sceneBar = $('.scene-bar');
         this.sceneFooter = $('#footer');
 
@@ -26,9 +24,15 @@ class Scene {
 
         this.soundButton = $('#sound-button');
         this.sound = $('#sound').get(0);
+        this.muted = true;
 
         this.progress = 0; //current progress of the scene
-        this.muted = true;
+
+        this.progressCircle = $('#progress-circle');
+        this.progressCircleLength = 150.72;
+
+        this.points = [];
+        this.currentPoint = 0;
 
         this.items = []; //scene items
 
@@ -48,11 +52,14 @@ class Scene {
             item.bgBlock = null;
             item.index = $(element).data('index');
 
+            let that = this;
             $(element).find('.scene-item__content-point').each(function(){
                 let point = {};
                 point.block = $(this);
+                point.block.addClass('enter');
                 point.position = $(this).data('appear');
-                item.points.push(point);
+                point.animation = $(this).data('animation');
+                that.points.push(point);
             });
 
             item.bgLayer1 = this.sceneBlock.find('.scene-bg-layer-1 .scene-bg-layer__item[data-index="'+item.index+'"]');
@@ -62,22 +69,155 @@ class Scene {
             this.items.push(item);
         });
 
-        
+        this.points.push({
+            block : this.sceneFooter,
+            position : 100,
+            animation : 'footer'
+        });
        
     }
     init() {
         
         this.startButton.click((e)=>this.startScene(e));
 
+        this.resize();
+        $(window).resize(this.resize.bind(this));
+    
+    }
+
+    resize(){
+        this.screenWidth = $(window).width();
+        this.screenHeight = $(window).height();
+
+        this.itemWidth = this.screenHeight*0.5 / 0.1385;
+        this.totalWidth = 0.973 * (3 * this.itemWidth);
+
         this.bgLayer1.width(this.totalWidth);
 
         this.items.forEach(element => {
-            element.block.height(this.itemWidth);
+
             element.bgLayer1.width(this.itemWidth);
         
         });
-    
     }
+
+    initFullScroll(){
+
+        $('body').bind(
+            'mousewheel', 
+            throttle(
+                1000, 
+                false, 
+                (e) => {
+                    if(e.originalEvent.wheelDelta /120 > 0) {
+                        console.log('scrolling up !');
+                        this.prevSlide();
+                    }
+                    else{
+                        console.log('scrolling down !');
+                        this.nextSlide();
+                    }
+                    //console.log('num:', num);
+                } /*,
+                true*/
+            )
+        );
+
+        $('body').on('swipeup',()=>{
+            console.log('swipe up');
+            this.prevSlide();
+        });
+        $('body').on('swipedown',()=>{
+            console.log('swipe down');
+            this.nextSlide();
+        });
+
+        
+        //colors
+        this.bgColorAnimation = new TimelineLite({paused:true});
+        this.bgColorAnimation.to(this.bgGlobal , { backgroundColor: '#F1AB79' } ).to(this.bgGlobal , { backgroundColor: '#13558C' } );
+
+        this.barColorAnimation = new TimelineLite({paused:true});
+        this.barColorAnimation.to(this.sceneBar , { backgroundColor: '#2F2954' } ).to(this.bgGlobal , { backgroundColor: '#072A4D' } );
+
+        this.progressColorAnimation = new TimelineLite({paused:true});
+        this.progressColorAnimation.to(this.progressCircle , { stroke: '#F1AB79' } ).to(this.bgGlobal , { stroke: '#13558C' } );
+        
+    }
+
+    prevSlide(){
+        let oldPoint = this.currentPoint;
+        this.currentPoint = this.currentPoint<=0?this.currentPoint:this.currentPoint-1;
+
+        this.progress = 0.01*this.points[this.currentPoint].position;
+        this.onProgressChange();
+
+        this.points[oldPoint].block.removeClass('leave').addClass('enter').removeClass('active');
+        this.points[this.currentPoint].block.addClass('leave').addClass('active');
+
+    }
+
+    nextSlide(){
+        let oldPoint = this.currentPoint;
+        this.currentPoint = this.currentPoint>=this.points.length?this.currentPoint:this.currentPoint+1;
+
+        this.progress = 0.01*this.points[this.currentPoint].position;
+        this.onProgressChange();
+
+        //previous animation
+        let that = this;
+        this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+        this.points[this.currentPoint].block.addClass('enter').addClass('active');
+        
+        //gsap.to( that.points[oldPoint].block, {opacity: 0, y: -20 , duration: 0.2 });
+        //gsap.to( that.this.points[this.currentPoint].block , {opacity: 1, y: 0 , duration: 0.2 })
+
+        //change logos
+        this.logoChange();
+    }
+
+    onProgressChange(){
+        gsap.to(this.bgGlobal,{ 
+            ease: "easein",
+            left:  this.progress * (-this.totalWidth + this.screenWidth) , 
+            duration: 1
+        });
+
+        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
+            ease: "easein",
+            xPercent: -this.progress*100,
+            left: this.progress * this.totalWidth,
+            duration: 1
+        });
+
+        gsap.to(this.progressCircle,{
+            ease: "easein",
+            strokeDashoffset: this.progressCircleLength - (this.progressCircleLength * this.progress),
+            duration: 1
+        });
+
+        //colors change
+        gsap.to(this.bgColorAnimation,0.5, {progress: this.progress });
+        gsap.to(this.barColorAnimation,0.5, {progress: this.progress });
+        gsap.to(this.progressColorAnimation,0.5, {progress: this.progress });
+
+    }
+
+    logoChange(){
+        
+        if(this.currentPoint<4){
+            $('.header-logo__item').removeClass('active');
+            $('.header-logo__item-'+1).addClass('active');
+        } else if(this.currentPoint >= 4 && this.currentPoint<=8){
+            $('.header-logo__item').removeClass('active');
+            $('.header-logo__item-'+2).addClass('active');
+        } else if(this.currentPoint >= 9){
+            $('.header-logo__item').removeClass('active');
+            $('.header-logo__item-'+3).addClass('active');
+        } 
+        
+    }
+
 
     initScroll(){
         let that = this;
@@ -346,7 +486,9 @@ class Scene {
     startScene(e){
         $('body').addClass('started');
 
-        this.firstText = gsap.from( this.items[0].points[0].block ,{
+        $('.header-logo__item').removeClass('active');
+        $('.header-logo__item-'+1).addClass('active');
+        /*this.firstText = gsap.from( this.items[0].points[0].block ,{
             opacity: 0,
             y: 50
         }).pause();
@@ -360,7 +502,7 @@ class Scene {
 
         },700);
 
-        this.car.play();
+        this.car.play();*/
     }
 
     load(){
@@ -396,7 +538,7 @@ class Scene {
         this.animationsArray.push(this.car);
 
         this.items.forEach(element => {
-            element.block.height(this.itemWidth);
+            //element.block.height(this.itemWidth);
             element.bgLayer1.width(this.itemWidth);
 
             element.animation1 = bodymovin.loadAnimation({

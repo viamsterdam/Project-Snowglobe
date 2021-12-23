@@ -14,7 +14,10 @@
     padding-top: 68px
     padding-right: 70px
     .started &
-        top: 0
+        top: 100%
+        transition: 0.8s ease-out
+        &.active
+            top: 0
     &:before
         content: ''
         position: absolute
