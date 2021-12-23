@@ -95,18 +95,11 @@ class Scene {
         this.totalWidth = 0.973 * (3 * this.itemWidth);
 
         this.bgLayer1.width(this.totalWidth);
+        this.bgLayer2.width(this.totalWidth * 0.92);
+        this.bgLayer3.width(this.totalWidth * 0.74);
+        this.bgLayer4.width(this.totalWidth * 0.51);
+        this.bgLayer5.width(this.totalWidth * 0.32);
 
-
-        this.items.forEach(element => {
-            //this.item1Width = this.screenHeight*0.61 / 0.1894;
-            this.item2Width = this.screenHeight*0.61 / 0.1894;
-            this.item3Width = this.screenHeight*0.61 / 0.2368;
-
-            //element.bgLayer1.width(this.item1Width);
-            //element.bgLayer2.width(this.item2Width);
-            //element.bgLayer3.width(this.item3Width);
-        
-        });
     }
 
     initFullScroll(){
@@ -191,16 +184,11 @@ class Scene {
     }
 
     onProgressChange(){
-        gsap.to(this.bgGlobal,{ 
-            ease: "easeout",
-            left:  this.progress * (-this.totalWidth + this.screenWidth) , 
-            duration: 1
-        });
 
-        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
+        gsap.to($('.scene-bg-layer'),{
             ease: "easeout",
             xPercent: -this.progress*100,
-            left: this.progress * this.totalWidth,
+            left: this.progress*this.screenWidth,
             duration: 1
         });
 
