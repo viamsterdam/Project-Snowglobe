@@ -192,20 +192,20 @@ class Scene {
 
     onProgressChange(){
         gsap.to(this.bgGlobal,{ 
-            ease: "none",
+            ease: "easeout",
             left:  this.progress * (-this.totalWidth + this.screenWidth) , 
             duration: 1
         });
 
         gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
-            ease: "none",
+            ease: "easeout",
             xPercent: -this.progress*100,
             left: this.progress * this.totalWidth,
             duration: 1
         });
 
         gsap.to(this.progressCircle,{
-            ease: "easein",
+            ease: "easeout",
             strokeDashoffset: this.progressCircleLength - (this.progressCircleLength * this.progress),
             duration: 1
         });
@@ -267,7 +267,7 @@ class Scene {
         }
         
 
-        if(this.currentPoint==14){
+        if(this.currentPoint>=14){
             this.fireworksWrapper.fadeIn();
             this.fireworks.play();
         } else{
