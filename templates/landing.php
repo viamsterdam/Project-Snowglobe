@@ -370,7 +370,12 @@
 
         <?php /* Progress bar */ ?>
         <div class="scene-bar__progress">
-            <p class="scene-bar__progress__txt"><?php _e('Scroll down to explore', 'snowglobe'); ?></p>
+        <?php 
+            $scroll_text = get_field('scroll_text'); 
+            if ($scroll_text) :
+            ?>
+            <p class="scene-bar__progress__txt"><?php _e($scroll_text, 'snowglobe'); ?></p>
+            <?php endif; ?>
             <div id="progress" class="scene-bar__progress__circle">
                 <img class="scene-bar__progress__circle__bg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEiIGhlaWdodD0iNTEiIHZpZXdCb3g9IjAgMCA1MSA1MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBvcGFjaXR5PSIwLjciIGN4PSIyNS4yNjI1IiBjeT0iMjUuODQ4NiIgcj0iMjQuNSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLWRhc2hhcnJheT0iMiAyIi8+Cjwvc3ZnPgo=" alt="Progress circle">
                 <svg width="50" height="50" viewPort="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg">

@@ -3,6 +3,25 @@
     "title": "Landing Page",
     "fields": [
         {
+            "key": "field_61c46c4581b81",
+            "label": "Scroll Text",
+            "name": "scroll_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_61c3495ec895e",
             "label": "Intro",
             "name": "intro",
@@ -825,5 +844,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1640262342
+    "modified": 1640262791
 }
