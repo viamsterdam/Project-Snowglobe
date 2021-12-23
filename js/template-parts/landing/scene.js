@@ -172,7 +172,9 @@ class Scene {
         this.onProgressChange();
 
         //previous animation
-        this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+        if(this.currentPoint!=15){
+            this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+        }
         this.points[this.currentPoint].block.addClass('enter').addClass('active');
         
         //gsap.to( that.points[oldPoint].block, {opacity: 0, y: -20 , duration: 0.2 });
@@ -221,9 +223,11 @@ class Scene {
         } else if(this.currentPoint >= 4 && this.currentPoint<=8){
             $('.header-logo__item').removeClass('active');
             $('.header-logo__item-'+2).addClass('active');
-        } else if(this.currentPoint >= 9){
+        } else if(this.currentPoint >= 9 && this.currentPoint < 14){
             $('.header-logo__item').removeClass('active');
             $('.header-logo__item-'+3).addClass('active');
+        } else if(this.currentPoint >= 14){
+            $('.header-logo__item').removeClass('active');
         } 
         
     }
