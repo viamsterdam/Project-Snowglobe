@@ -408,7 +408,16 @@
         <?php /* Language bar */ ?>
         <div class="language-bar scene-bar__language">
             <button class="language-bar__btn">
-                <span class="language-bar__btn__txt">NL</span>
+                <span class="language-bar__btn__txt">
+                    <?php 
+                    global $wp;
+                    $url = home_url( $wp->request );
+                    $urlArray = explode('/',$url);
+                    if(end($urlArray) == 'de') { echo 'DE'; }
+                    else if(end($urlArray) == 'en') { echo 'EN'; }
+                    else { echo 'NL'; }
+                    ?>
+                </span>
                 <span class="language-bar__btn__icon"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNiIgdmlld0JveD0iMCAwIDEwIDYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMC41MzUwMTQgMS4xMTkxNEMwLjM2OTg4NiAwLjk1NDAxMyAwLjM2OTg4NiAwLjY4NjI4NyAwLjUzNTAxNCAwLjUyMTE1OVYwLjUyMTE1OUMwLjcwMDE0MiAwLjM1NjAzMSAwLjk2Nzg2OCAwLjM1NjAzMSAxLjEzMyAwLjUyMTE1OUw0LjQyMDg1IDMuODA5MDFDNC42ODg5MyA0LjA3NzEgNS4xMjM1OSA0LjA3NzEgNS4zOTE2NyAzLjgwOTAxTDguNjc5NTIgMC41MjExNTlDOC44NDQ2NSAwLjM1NjAzMSA5LjExMjM4IDAuMzU2MDMxIDkuMjc3NTEgMC41MjExNTlWMC41MjExNTlDOS40NDI2MyAwLjY4NjI4NyA5LjQ0MjYzIDAuOTU0MDE0IDkuMjc3NTEgMS4xMTkxNEw1LjM5MTY3IDUuMDA0OTdDNS4xMjM1OSA1LjI3MzA2IDQuNjg4OTMgNS4yNzMwNiA0LjQyMDg1IDUuMDA0OTdMMC41MzUwMTQgMS4xMTkxNFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=" alt=""></span>
             </button>
             <ul class="language-bar__list">

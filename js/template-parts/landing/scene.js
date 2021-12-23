@@ -100,6 +100,7 @@ class Scene {
         this.bgLayer4.width(this.totalWidth * 0.51);
         this.bgLayer5.width(this.totalWidth * 0.32);
 
+        this.onProgressChange();
     }
 
     initFullScroll(){
@@ -185,7 +186,14 @@ class Scene {
 
     onProgressChange(){
 
-        gsap.to($('.scene-bg-layer'),{
+        gsap.to($('.scene-bg-layer-1'),{
+            ease: "easeout",
+            xPercent: -this.progress*100,
+            left: this.progress*this.screenWidth,
+            duration: 1
+        });
+
+        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
             ease: "easeout",
             xPercent: -this.progress*100,
             left: this.progress*this.screenWidth,
