@@ -825,6 +825,25 @@
                 "id": ""
             },
             "return_format": "array"
+        },
+        {
+            "key": "field_61c482fcaa47d",
+            "label": "Footer book text",
+            "name": "footer_book_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -844,5 +863,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1640262791
+    "modified": 1640268558
 }
