@@ -12,7 +12,10 @@
         <div id="load-animation" class="scene-loader__img" data-path="<?php echo get_template_directory_uri(); ?>/assets/lottie/loader.json"></div>
     </div>
     <div class="scene-loader__txt">
-        <span>Website loading ...</span>
+        <?php $website_loading = get_field('website_loading');
+        if ($website_loading) : ?>
+        <span><?php echo $website_loading ?></span>
+        <?php endif; ?>
         <span class="scene-loader__txt__value"><span id="loader-value">0</span>%</span>
     </div>
 </div>
