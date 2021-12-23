@@ -58,6 +58,9 @@
         //opacity: 0
         max-height: 0
         transition: 0.3s ease-out
+        +max-screen($breakpoint-md)
+            right: auto
+            left: 0
         .language-bar:hover &
             opacity: 1
             max-height: 200px
