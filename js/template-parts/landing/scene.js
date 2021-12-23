@@ -96,9 +96,15 @@ class Scene {
 
         this.bgLayer1.width(this.totalWidth);
 
-        this.items.forEach(element => {
 
-            element.bgLayer1.width(this.itemWidth);
+        this.items.forEach(element => {
+            //this.item1Width = this.screenHeight*0.61 / 0.1894;
+            this.item2Width = this.screenHeight*0.61 / 0.1894;
+            this.item3Width = this.screenHeight*0.61 / 0.2368;
+
+            //element.bgLayer1.width(this.item1Width);
+            //element.bgLayer2.width(this.item2Width);
+            //element.bgLayer3.width(this.item3Width);
         
         });
     }

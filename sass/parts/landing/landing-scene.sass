@@ -15,7 +15,7 @@
         position: fixed
         top: 0
         left: 0
-        height: calc(100% - 145px)
+        height: calc(100% - 144px)
         width: auto
         display: flex
         pointer-events: none
@@ -53,12 +53,18 @@
                 z-index: 4
                 width: 92%
                 transform: translateY(80%)
-                
+                .scene-bg-layer__item
+                    width: (100%/3)
             &-3
                 z-index: 3
                 width: 74%
                 transform: translateY(20%)
-
+                .scene-bg-layer__item
+                    width: (100%/3)
+                    &-2
+                        margin-left: -2px
+                    &-3
+                        margin-left: -2px
             &-4
                 z-index: 2
                 width: 51%
