@@ -392,10 +392,10 @@
             <?php endif; ?>
             <button class="button js-scene-start">
                 <?php 
-                $scroll_text = get_field('scroll_text'); 
-                if ($scroll_text) :
+                $start_button_text = get_field('start_button_text'); 
+                if ($start_button_text) :
                 ?>
-                <?php _e($scroll_text,'snowglobe'); ?>
+                <?php _e($start_button_text,'snowglobe'); ?>
                 <?php endif; ?>
             </button>
         </div>
