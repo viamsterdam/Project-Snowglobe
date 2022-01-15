@@ -2,6 +2,7 @@ import $  from 'jquery';
 import { gsap , TimelineLite} from "gsap";
 import bodymovin from 'lottie-web/build/player/lottie_svg.min.js';
 import bodymovinCanvas from 'lottie-web/build/player/lottie_canvas.min.js';
+import { throttle } from 'throttle-debounce';
 
 const loadTouchEvents = require('jquery-touch-events');
 loadTouchEvents($);
@@ -75,6 +76,8 @@ class Scene {
             position : 100,
             animation : 'footer'
         });
+
+        console.log(this.points);
        
     }
     init() {
@@ -178,9 +181,11 @@ class Scene {
                     if(isAccelerating && isScrollingVertically){
                         //scrolling down?
                         if (delta < 0) {
+                            console.log('down');
                             that.nextSlide();
                         //scrolling up?
                         }else {
+                            console.log('up');
                             that.prevSlide();
                         }
                     }
@@ -221,9 +226,11 @@ class Scene {
 
 
         $('body').on('swipeup',()=>{
+            console.log('swipe up');
             this.nextSlide();
         });
         $('body').on('swipedown',()=>{
+            console.log('swipe down');
             this.prevSlide();
         });
 
@@ -244,9 +251,6 @@ class Scene {
         let oldPoint = this.currentPoint;
         this.currentPoint = this.currentPoint<=0?this.currentPoint:this.currentPoint-1;
 
-        this.sceneBlock.attr('data-point', this.currentPoint);
-        this.sceneBlock.removeClass('scene-forward').addClass('scene-back');
-
         this.progress = 0.01*this.points[this.currentPoint].position;
         this.onProgressChange();
 
@@ -261,11 +265,9 @@ class Scene {
         let oldPoint = this.currentPoint;
         this.currentPoint = this.currentPoint>=this.points.length?this.currentPoint:this.currentPoint+1;
 
-        console.log(this.sceneBlock);
-        this.sceneBlock.attr('data-point', this.currentPoint);
-        this.sceneBlock.removeClass('scene-back').addClass('scene-forward');
-
         this.progress = 0.01*this.points[this.currentPoint].position;
+        
+
         this.onProgressChange();
 
         //previous animation
@@ -273,24 +275,30 @@ class Scene {
             this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
         }
         this.points[this.currentPoint].block.addClass('enter').addClass('active');
+        
+        //gsap.to( that.points[oldPoint].block, {opacity: 0, y: -20 , duration: 0.2 });
+        //gsap.to( that.this.points[this.currentPoint].block , {opacity: 1, y: 0 , duration: 0.2 })
 
         //change logos
-        setTimeout(()=>{
-            this.logoChange();
-            this.linkChange();
-            this.lottieAnimations();
-        },1000);
+        this.logoChange();
+        this.lottieAnimations();
+
     }
 
     onProgressChange(){
 
-        $('.scene-bg-layer').each((index , element)=>{
-            let el = $(element);
-            gsap.to(el,{
-                ease: "easeout",
-                x: -this.progress*(el.width()-this.screenWidth),
-                duration: 1
-            });
+        gsap.to($('.scene-bg-layer-1'),{
+            ease: "easeout",
+            xPercent: -this.progress*100,
+            left: this.progress*this.screenWidth,
+            duration: 1
+        });
+
+        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
+            ease: "easeout",
+            xPercent: -this.progress*100,
+            left: this.progress*this.screenWidth,
+            duration: 1
         });
 
         gsap.to(this.progressCircle,{
@@ -322,43 +330,39 @@ class Scene {
         } 
         
     }
-    linkChange(){
-        
-        
-    }
 
     lottieAnimations(){
         
         if(this.currentPoint>4){
             this.items[0].animation1.pause();
             this.items[0].animation2.pause();
-            this.items[0].animation3.pause();
+            this.items[0].animation2.pause();
         } else{
             this.items[0].animation1.play();
             this.items[0].animation2.play();
-            this.items[0].animation3.play();
+            this.items[0].animation2.play();
         }
 
         if(this.currentPoint>=3 && this.currentPoint<=9){
             this.items[1].animation1.play();
             this.items[1].animation2.play();
-            this.items[1].animation3.play();
+            this.items[1].animation2.play();
             
         } else{
             this.items[1].animation1.pause();
             this.items[1].animation2.pause();
-            this.items[1].animation3.pause();
+            this.items[1].animation2.pause();
         }
 
         if(this.currentPoint>=8){
             this.items[2].animation1.play();
             this.items[2].animation2.play();
-            this.items[2].animation3.play();
+            this.items[2].animation2.play();
             
         } else{
             this.items[2].animation1.pause();
             this.items[2].animation2.pause();
-            this.items[2].animation3.pause();
+            this.items[2].animation2.pause();
         }
         
 

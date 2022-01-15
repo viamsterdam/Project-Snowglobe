@@ -19,7 +19,7 @@
         <span class="scene-loader__txt__value"><span id="loader-value">0</span>%</span>
     </div>
 </div>
-<div id="scene" class="scene" data-point="0">
+<div id="scene" class="scene">
     <?php
     
     $intro = get_field('intro');
