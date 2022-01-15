@@ -118,32 +118,32 @@
             transform: rotateY(180deg)
             transform-style: preserve-3d
         +screen(1000px, 1120px)
-            .scene[data-point="15"] &
+            .scene[data-point="16"] &
                 bottom: 170px
         +screen(800px, 1000px)
-            .scene[data-point="14"] &
-                bottom: 190px
             .scene[data-point="15"] &
+                bottom: 190px
+            .scene[data-point="16"] &
                 bottom: 200px
         +screen(620px, 800px)
-            .scene[data-point="12"] &
-                bottom: 170px
             .scene[data-point="13"] &
-                bottom: 180px
+                bottom: 170px
             .scene[data-point="14"] &
-                bottom: 210px
+                bottom: 180px
             .scene[data-point="15"] &
+                bottom: 210px
+            .scene[data-point="16"] &
                 bottom: 220px
         +screen(0px, 620px)
-            .scene[data-point="11"] &
-                bottom: 170px
             .scene[data-point="12"] &
-                bottom: 200px
+                bottom: 170px
             .scene[data-point="13"] &
-                bottom: 220px
+                bottom: 200px
             .scene[data-point="14"] &
                 bottom: 220px
             .scene[data-point="15"] &
+                bottom: 220px
+            .scene[data-point="16"] &
                 bottom: 220px
         +max-screen($breakpoint-md)
             bottom: 160px
@@ -216,6 +216,11 @@
                         opacity: 1
                         transform: translateY(0)
 
+                +max-screen($breakpoint-md)
+                    .scene[data-point="16"] &
+                        opacity: 0
+                        transform: translateY(-30px)
+                        transition-delay: 0s
                 .content-block
                     max-width: 310px
                     h2
@@ -229,6 +234,7 @@
                         font-size: 16px
                         line-height: 22px
         &-3
-            .scene-item__content-point
-                &.enter.active:nth-child(6)
-                    transition-delay: 3s
+            .scene[data-point="15"] &
+                .scene-item__content-point
+                    &.enter.active:nth-child(6)
+                        transition-delay: 3s

@@ -85,6 +85,35 @@
                 opacity: 1
                 transform: translate3d(0, 0, 0)
 
+        &--main
+            display: none
+            .scene[data-point="0"] &,
+            .scene[data-point="15"] &,
+            .scene[data-point="16"] &
+                display: inline-block
+        &--1
+            display: none
+            .scene[data-point="1"] &,
+            .scene[data-point="2"] &,
+            .scene[data-point="3"] &,
+            .scene[data-point="4"] &
+                display: inline-block
+        &--2
+            display: none
+            .scene[data-point="5"] &,
+            .scene[data-point="6"] &,
+            .scene[data-point="7"] &,
+            .scene[data-point="8"] &,
+            .scene[data-point="9"] &
+                display: inline-block
+        &--3
+            display: none
+            .scene[data-point="10"] &,
+            .scene[data-point="11"] &,
+            .scene[data-point="12"] &,
+            .scene[data-point="13"] &,
+            .scene[data-point="14"] &
+                display: inline-block
     &__progress
         position: fixed
         bottom: 37px

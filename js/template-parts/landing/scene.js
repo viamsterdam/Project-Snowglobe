@@ -23,6 +23,7 @@ class Scene {
 
         this.soundButton = $('#sound-button');
         this.sound = $('#sound').get(0);
+        this.sound.volume = 0.5;
         this.muted = true;
 
         this.progress = 0; //current progress of the scene
@@ -244,14 +245,14 @@ class Scene {
         let oldPoint = this.currentPoint;
         this.currentPoint = this.currentPoint<=0?this.currentPoint:this.currentPoint-1;
 
-        this.sceneBlock.attr('data-point', this.currentPoint);
+        this.sceneBlock.attr('data-point', this.currentPoint+1);
         this.sceneBlock.removeClass('scene-forward').addClass('scene-back');
 
         this.progress = 0.01*this.points[this.currentPoint].position;
         this.onProgressChange();
 
         this.points[oldPoint].block.removeClass('leave').addClass('enter').removeClass('active');
-        this.points[this.currentPoint].block.addClass('leave').addClass('active');
+        this.points[this.currentPoint].block.removeClass('enter').addClass('leave').addClass('active');
 
         this.logoChange();
         this.lottieAnimations();
@@ -261,8 +262,7 @@ class Scene {
         let oldPoint = this.currentPoint;
         this.currentPoint = this.currentPoint>=this.points.length?this.currentPoint:this.currentPoint+1;
 
-        console.log(this.sceneBlock);
-        this.sceneBlock.attr('data-point', this.currentPoint);
+        this.sceneBlock.attr('data-point', this.currentPoint+1);
         this.sceneBlock.removeClass('scene-back').addClass('scene-forward');
 
         this.progress = 0.01*this.points[this.currentPoint].position;
@@ -403,11 +403,13 @@ class Scene {
         $('.header-logo__item').removeClass('active');
         $('.header-logo__item-'+1).addClass('active');
 
-        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
+        gsap.to($('.scene-bg-layer'),{
             ease: "easein",
             y: 0,
             duration: 0.7
         });
+
+        this.sceneBlock.attr('data-point', 1);
 
         this.car.play();
         this.playSound();
