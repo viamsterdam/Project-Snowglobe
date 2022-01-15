@@ -13,6 +13,8 @@
     padding-bottom: 142px
     padding-top: 68px
     padding-right: 70px
+
+    will-change: top
     +max-screen($breakpoint-md)
         max-width: 100%
         height: auto
@@ -25,10 +27,11 @@
         transform: translateY(15%)
     .started &
         top: 100%
-        transition: 0.8s ease-out
+        transition: 0.8s cubic-bezier(1, 0.13, 0.58, 1)
         &.active
             top: 0
             z-index: 100
+            transition-delay: 0.7s
             +max-screen($breakpoint-md)
                 top: 100%
                 transform: translateY(-100%)
