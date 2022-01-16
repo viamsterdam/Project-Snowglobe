@@ -27,6 +27,8 @@ class Scene {
         this.muted = true;
 
         this.progress = 0; //current progress of the scene
+        this.stepCount = 0;
+
 
         this.progressCircle = $('#progress-circle');
         this.progressCircleLength = 150.72;
@@ -102,7 +104,11 @@ class Scene {
             element.bgLayer1.width(this.itemWidth);
         });
 
-        this.onProgressChange();
+        if(this.stepCount != 0){
+            this.onProgressChange();
+        }
+
+        this.stepCount++;
     }
 
     initFullScroll(){
@@ -404,9 +410,9 @@ class Scene {
         $('.header-logo__item-'+1).addClass('active');
 
         gsap.to($('.scene-bg-layer'),{
-            ease: "easein",
+            ease: "easeout",
             y: 0,
-            duration: 0.7
+            duration: 1.2
         });
 
         this.sceneBlock.attr('data-point', 1);

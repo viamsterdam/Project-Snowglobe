@@ -303,10 +303,10 @@
             <div class="scene-bg-layer__item scene-bg-layer__item-3" data-index="3" data-path="<?php echo get_template_directory_uri(); ?>/assets/scene/scene-3-3.json"></div>
         </div>
         <div id="snow" class="scene-snow" data-path="<?php echo get_template_directory_uri(); ?>/assets/lottie/snow.json"></div>
-        <div id="fireworks" class="scene-fireworks" data-path="<?php echo get_template_directory_uri(); ?>/assets/lottie/fireworks.json"></div>
         <div class="scene-bg-layer scene-bg-layer-4">
             <div class="scene-bg-layer__full"><img src="<?php echo get_template_directory_uri(); ?>/assets/scene/scene-4.svg" alt=""></div>
         </div>
+        <div id="fireworks" class="scene-fireworks" data-path="<?php echo get_template_directory_uri(); ?>/assets/lottie/fireworks.json"></div>
         <div class="scene-bg-layer scene-bg-layer-5">
             <div class="scene-bg-layer__full"><img src="<?php echo get_template_directory_uri(); ?>/assets/scene/scene-5.svg" alt=""></div>
         </div>

@@ -28,7 +28,6 @@
             .started &
                 height: calc(100% - 168px)
 
-
         &-layer
             display: flex
             align-items: flex-end
@@ -37,7 +36,7 @@
             left: 0
             line-height: 0
             &-1
-                z-index: 6
+                z-index: 7
                 width: 8245px
                 .scene-bg-layer__item
                     position: relative
@@ -50,13 +49,13 @@
                         z-index: 1
                         margin-left: -1.3%
             &-2
-                z-index: 4
+                z-index: 5
                 width: 92%
                 transform: translateY(80%)
                 .scene-bg-layer__item
                     width: (100%/3)
             &-3
-                z-index: 3
+                z-index: 4
                 width: 74%
                 transform: translateY(20%)
                 .scene-bg-layer__item
@@ -66,7 +65,7 @@
                     &-3
                         margin-left: -2px
             &-4
-                z-index: 2
+                z-index: 3
                 width: 51%
                 transform: translateY(80%)
                 
@@ -112,8 +111,8 @@
         left: -400px
         width: 300px
         max-width: 30%
-        z-index: 5
-        transition: 0.4s
+        z-index: 6
+        transition: 0.8s
         .scene-back &
             transform: rotateY(180deg)
             transform-style: preserve-3d
@@ -159,7 +158,11 @@
         left: 0
         width: 100%
         height: 100%
-        z-index: 3
+        z-index: 4
+    #fireworks
+        z-index: 2
+        top: auto
+        bottom: 100px
     #snow
         height: auto
 
