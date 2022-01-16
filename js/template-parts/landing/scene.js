@@ -1,5 +1,5 @@
 import $  from 'jquery';
-import { gsap , TimelineLite} from "gsap";
+import { TweenMax , TimelineLite} from "gsap";
 import bodymovin from 'lottie-web/build/player/lottie_svg.min.js';
 import bodymovinCanvas from 'lottie-web/build/player/lottie_canvas.min.js';
 
@@ -260,8 +260,12 @@ class Scene {
         this.points[oldPoint].block.removeClass('leave').addClass('enter').removeClass('active');
         this.points[this.currentPoint].block.removeClass('enter').addClass('leave').addClass('active');
 
+        //change logos
         this.logoChange();
-        this.lottieAnimations();
+        this.linkChange();
+        setTimeout(()=>{
+            this.lottieAnimations();
+        },1000);
     }
 
     nextSlide(){
@@ -281,9 +285,9 @@ class Scene {
         this.points[this.currentPoint].block.addClass('enter').addClass('active');
 
         //change logos
+        this.logoChange();
+        this.linkChange();
         setTimeout(()=>{
-            this.logoChange();
-            this.linkChange();
             this.lottieAnimations();
         },1000);
     }
@@ -292,23 +296,23 @@ class Scene {
 
         $('.scene-bg-layer').each((index , element)=>{
             let el = $(element);
-            gsap.to(el,{
+            TweenMax.to(el,{
                 ease: "easeout",
                 x: -this.progress*(el.width()-this.screenWidth),
-                duration: 1
+                duration: 1,
             });
         });
 
-        gsap.to(this.progressCircle,{
+        TweenMax.to(this.progressCircle,{
             ease: "easeout",
             strokeDashoffset: this.progressCircleLength - (this.progressCircleLength * this.progress),
             duration: 1
         });
 
         //colors change
-        gsap.to(this.bgColorAnimation,0.5, {progress: this.progress });
-        gsap.to(this.barColorAnimation,0.5, {progress: this.progress });
-        gsap.to(this.progressColorAnimation,0.5, {progress: this.progress });
+        TweenMax.to(this.bgColorAnimation,0.5, {progress: this.progress });
+        TweenMax.to(this.barColorAnimation,0.5, {progress: this.progress });
+        TweenMax.to(this.progressColorAnimation,0.5, {progress: this.progress });
 
     }
 
@@ -409,7 +413,7 @@ class Scene {
         $('.header-logo__item').removeClass('active');
         $('.header-logo__item-'+1).addClass('active');
 
-        gsap.to($('.scene-bg-layer'),{
+        TweenMax.to($('.scene-bg-layer'),{
             ease: "easeout",
             y: 0,
             duration: 1.2
