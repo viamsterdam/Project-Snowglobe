@@ -60,7 +60,13 @@ class Scene {
                 let point = {};
                 point.block = $(this);
                 point.block.addClass('enter');
-                point.position = parseInt($(this).data('appear'));
+                
+                if($(window).width()>768){
+                    point.position = parseInt($(this).data('appear'));
+                } else{
+                    point.position = parseInt($(this).data('appear-mobile'));
+                }
+
                 point.animation = $(this).data('animation');
                 that.points.push(point);
             });
