@@ -1,6 +1,5 @@
 .scene
     background-color: $color-blue-bg
-
     &-scroll
         &-outer
             position: absolute
@@ -24,7 +23,7 @@
         background-color: $scene-1-color
         +max-screen($breakpoint-md)
             height: calc(100% - 148px)
-            transition: 0.5s ease-out
+            //transition: 0.5s ease-out
             .started &
                 height: calc(100% - 168px)
 
@@ -35,6 +34,7 @@
             bottom: 0
             left: 0
             line-height: 0
+            will-change: transform
             &-1
                 z-index: 7
                 width: 8245px
@@ -51,13 +51,13 @@
             &-2
                 z-index: 5
                 width: 92%
-                transform: translateY(80%)
+                transform: translate3d(0,80%,0)
                 .scene-bg-layer__item
                     width: (100%/3)
             &-3
                 z-index: 4
                 width: 74%
-                transform: translateY(20%)
+                transform: translate3d(0,20%,0)
                 .scene-bg-layer__item
                     width: (100%/3)
                     &-2
@@ -67,7 +67,7 @@
             &-4
                 z-index: 3
                 width: 51%
-                transform: translateY(80%)
+                transform: translate3d(0,80%,0)
                 
             &-5
                 z-index: 1
@@ -112,7 +112,7 @@
         width: 300px
         max-width: 30%
         z-index: 6
-        transition: 0.8s
+        transition: bottom 0.8s, left 0.8s, transform 0.8s
         .scene-back &
             transform: rotateY(180deg)
             transform-style: preserve-3d
@@ -185,16 +185,16 @@
                     margin-left: -158px
                 .started &
                     opacity: 0
-                    transition: 0.5s ease-out
-                    will-change: opacity transform
+                    transition: opacity 0.5s ease-out, transform 0.5s ease-out
+                    will-change: opacity, transform
                     &.leave
-                        transform: translateX(-50%) rotate(-30deg)
+                        transform: translate3d(-50%,0,0) rotate(-30deg)
                     &.enter
-                        transform: translateX(50%) rotate(30deg)
+                        transform: translate3d(50%,0,0) rotate(30deg)
                     &.active
                         transition-delay: 0.8s
                         opacity: 1
-                        transform: translateX(0)
+                        transform: translate3d(0,0,0)
             &--intro
                 width: 100%
                 top: 20vh
@@ -216,22 +216,22 @@
                 pointer-events: none
                 .started &
                     opacity: 0
-                    transition: 0.5s ease-out
-                    will-change: opacity transform
+                    transition: opacity 0.5s ease-out,transform 0.5s ease-out
+                    will-change: opacity, transform
                     &.leave
-                        transform: translateY(-30px)
+                        transform: translate3d(0,-30px,0)
                     &.enter
-                        transform: translateY(30px)
+                        transform: translate3d(0,30px,0)
                     &.active
                         transition-delay: 0.8s
                         opacity: 1
-                        transform: translateY(0)
+                        transform: translate3d(0,0,0)
                         pointer-events: initial
 
                 +max-screen($breakpoint-md)
                     .scene[data-point="16"] &
                         opacity: 0
-                        transform: translateY(-30px)
+                        transform: translate3d(0,-30px,0)
                         transition-delay: 0s
                 .content-block
                     max-width: 310px

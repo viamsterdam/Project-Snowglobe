@@ -21,7 +21,8 @@
     &__title
         max-width: 590px
         padding-right: 20px
-        transition: 0.5s ease-out
+        transition: transform 0.5s ease-out, opacity 0.5s ease-out
+        will-change: opacity, transform
         .started &
             transform: translate3d(0, -20px, 0)
             opacity: 0
@@ -31,8 +32,9 @@
     &__content
         max-width: 510px
         padding-top: 18px
-        transition: 0.5s ease-out
+        transition: transform 0.5s ease-out, opacity 0.5s ease-out
         transition-delay: 0.2s
+        will-change: opacity, transform
         +max-screen($breakpoint-lg)
             padding-top: 15px
         .started &

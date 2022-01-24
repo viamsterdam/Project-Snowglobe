@@ -1,5 +1,5 @@
 import $  from 'jquery';
-import { TweenMax , TimelineLite} from "gsap";
+import { gsap } from "gsap";
 import bodymovin from 'lottie-web/build/player/lottie_svg.min.js';
 import bodymovinCanvas from 'lottie-web/build/player/lottie_canvas.min.js';
 
@@ -97,7 +97,7 @@ class Scene {
     init() {
     
         this.resize();
-        $(window).resize(this.resize.bind(this));
+        $(window).on('resize',this.resize.bind(this));
     
     }
 
@@ -250,13 +250,13 @@ class Scene {
 
         
         //colors
-        this.bgColorAnimation = new TimelineLite({paused:true});
+        this.bgColorAnimation = gsap.timeline({paused:true});
         this.bgColorAnimation.to(this.bgGlobal , { backgroundColor: '#F1AB79' } ).to(this.bgGlobal , { backgroundColor: '#13558C' } );
 
-        this.barColorAnimation = new TimelineLite({paused:true});
+        this.barColorAnimation = gsap.timeline({paused:true});
         this.barColorAnimation.to(this.sceneBar , { backgroundColor: '#2F2954' } ).to(this.sceneBar , { backgroundColor: '#072A4D' } );
 
-        this.progressColorAnimation = new TimelineLite({paused:true});
+        this.progressColorAnimation = gsap.timeline({paused:true});
         this.progressColorAnimation.to(this.progressCircle , { stroke: '#F1AB79' } ).to(this.progressCircle , { stroke: '#13558C' } );
         
     }
@@ -284,50 +284,52 @@ class Scene {
 
     nextSlide(){
         let oldPoint = this.currentPoint;
-        this.currentPoint = this.currentPoint>=this.points.length?this.currentPoint:this.currentPoint+1;
+        this.currentPoint = (this.currentPoint+1)>=this.points.length?this.currentPoint:this.currentPoint+1;
 
-        this.sceneBlock.attr('data-point', this.currentPoint+1);
-        this.sceneBlock.removeClass('scene-back').addClass('scene-forward');
+        if(this.currentPoint != oldPoint){
+            this.sceneBlock.attr('data-point', this.currentPoint+1);
+            this.sceneBlock.removeClass('scene-back').addClass('scene-forward');
 
-        this.progress = 0.01*this.points[this.currentPoint].position;
-        this.onProgressChange();
+            this.progress = 0.01*this.points[this.currentPoint].position;
+            this.onProgressChange();
 
-        //previous animation
-        if(this.currentPoint!=15){
-            this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+            //previous animation
+            if(this.currentPoint!=15){
+                this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+            }
+
+            this.points[this.currentPoint].block.addClass('enter').addClass('active');
+
+            //change logos
+            this.logoChange();
+            this.linkChange();
+            setTimeout(()=>{
+                this.lottieAnimations();
+            },1000);
         }
-
-        this.points[this.currentPoint].block.addClass('enter').addClass('active');
-
-        //change logos
-        this.logoChange();
-        this.linkChange();
-        setTimeout(()=>{
-            this.lottieAnimations();
-        },1000);
     }
 
     onProgressChange(){
 
         $('.scene-bg-layer').each((index , element)=>{
             let el = $(element);
-            TweenMax.to(el,{
+            gsap.to(el,{
                 ease: "easeout",
                 x: -this.progress*(el.width()-this.screenWidth),
                 duration: 1,
             });
         });
 
-        TweenMax.to(this.progressCircle,{
+        gsap.to(this.progressCircle,{
             ease: "easeout",
             strokeDashoffset: this.progressCircleLength - (this.progressCircleLength * this.progress),
             duration: 1
         });
 
         //colors change
-        TweenMax.to(this.bgColorAnimation,0.5, {progress: this.progress });
-        TweenMax.to(this.barColorAnimation,0.5, {progress: this.progress });
-        TweenMax.to(this.progressColorAnimation,0.5, {progress: this.progress });
+        gsap.to(this.bgColorAnimation,0.5, {progress: this.progress });
+        gsap.to(this.barColorAnimation,0.5, {progress: this.progress });
+        gsap.to(this.progressColorAnimation,0.5, {progress: this.progress });
 
     }
 
@@ -432,7 +434,7 @@ class Scene {
         $('.header-logo__item').removeClass('active');
         $('.header-logo__item-'+1).addClass('active');
 
-        TweenMax.to($('.scene-bg-layer'),{
+        gsap.to($('.scene-bg-layer'),{
             ease: "easeout",
             y: 0,
             duration: 1.2
