@@ -151,6 +151,11 @@
             left: 68px
             +max-screen($breakpoint-md)
                 left: 0
+        &.finished
+            left: calc(100vw)
+            transition: left 4s ease-out
+            +max-screen($breakpoint-md)
+                transition: left 1s ease-out
 
     #snow , #fireworks
         position: fixed

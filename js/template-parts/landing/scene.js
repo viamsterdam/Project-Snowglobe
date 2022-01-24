@@ -60,10 +60,18 @@ class Scene {
                 let point = {};
                 point.block = $(this);
                 point.block.addClass('enter');
-                
-                if($(window).width()>768){
-                    point.position = parseInt($(this).data('appear'));
-                } else{
+
+               // data points for each screen size. Desktop 1600+, Laptop 1280, Tablet-portrait 768, Mobile 320,
+                if($(window).width()>1600){
+                    point.position = parseInt($(this).data('appear-desktop'));
+                } 
+                else if($(window).width()>1280){
+                    point.position = parseInt($(this).data('appear-laptop'))
+                }
+                else if($(window).width()>768){
+                    point.position = parseInt($(this).data('appear-tablet'))
+                }
+                else {
                     point.position = parseInt($(this).data('appear-mobile'));
                 }
 
@@ -288,6 +296,7 @@ class Scene {
         if(this.currentPoint!=15){
             this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
         }
+
         this.points[this.currentPoint].block.addClass('enter').addClass('active');
 
         //change logos
@@ -377,13 +386,17 @@ class Scene {
             this.items[2].animation3.pause();
         }
         
-
         if(this.currentPoint>=14){
             this.fireworksWrapper.fadeIn();
             this.fireworks.play();
         } else{
             this.fireworksWrapper.fadeOut();
             this.fireworks.pause();
+        }
+        if(this.currentPoint>=15){
+            this.carWrapper.addClass('finished');
+        } else{
+            this.carWrapper.removeClass('finished');
         }
     }
 
