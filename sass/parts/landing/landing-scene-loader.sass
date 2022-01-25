@@ -7,12 +7,13 @@
     z-index: 999
     background-color: #0C284D
     transition: background-color 1s ease-out 1s
+    will-change: background-color
     &.screen-loaded
         transition: 0s
-        background: transparent
+        background-color: transparent
         .loading &
             transition: background-color 1s ease-out 1s
-            background: $scene-1-color
+            background-color: $scene-1-color
         &:before
             opacity: 1
 
@@ -35,13 +36,20 @@
         top: 50%
         left: 50%
         transform: translate3d(-50%, -50%, 0)
-        width: 270px
+        width: 500px
         height: auto
         .screen-loaded &
-            transition: 1s ease-out
+            transition: transform 1s ease-out, width 1s ease-out, opacity 1s ease-out
             transition-delay: 0.7s
             opacity: 0
-            width: 120%
+            //width: 120%
+            transform: translate3d(-50%, -50%, 0) scale(5)
+            will-change: width, transform, opacity
+            +max-screen($breakpoint-md)
+                transform: translate3d(-50%, -50%, 0) scale(3)
+        canvas
+            width: 100%
+            height: auto
     &__img
 
     &__txt
@@ -51,7 +59,8 @@
         left: 0
         text-align: center
 
-        transition: 0.5s ease-out
+        transition: opacity 0.5s ease-out,transform 0.5s ease-out
+        will-change: opacity, transform
         +max-screen($breakpoint-md)
             bottom: 30px
             font-size: 10px

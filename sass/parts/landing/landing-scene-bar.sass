@@ -13,6 +13,7 @@
             height: 170px
 
     &:after
+        display: none
         content: ''
         position: absolute
         bottom: -158px
@@ -26,9 +27,19 @@
         transition: 1s ease-out
         pointer-events: none
         +max-screen($breakpoint-md)
+            display: block
             .started &
                 bottom: 0
-
+        +max-screen($breakpoint-md)
+            left: -56%
+            width: 240%
+            height: 135%
+        +max-screen($breakpoint-sm)
+            height: 190px
+        +max-screen(500px)
+            height: 164px
+        +max-screen(420px)
+            height: 148px
     &__start
         position: absolute
         left: 50%
@@ -84,6 +95,36 @@
                 opacity: 1
                 transform: translate3d(0, 0, 0)
 
+        &--main
+            display: none
+            .scene[data-point="0"] &,
+            .scene[data-point="15"] &,
+            .scene[data-point="16"] &,
+            .scene[data-point="17"] &
+                display: inline-block
+        &--1
+            display: none
+            .scene[data-point="1"] &,
+            .scene[data-point="2"] &,
+            .scene[data-point="3"] &,
+            .scene[data-point="4"] &
+                display: inline-block
+        &--2
+            display: none
+            .scene[data-point="5"] &,
+            .scene[data-point="6"] &,
+            .scene[data-point="7"] &,
+            .scene[data-point="8"] &,
+            .scene[data-point="9"] &
+                display: inline-block
+        &--3
+            display: none
+            .scene[data-point="10"] &,
+            .scene[data-point="11"] &,
+            .scene[data-point="12"] &,
+            .scene[data-point="13"] &,
+            .scene[data-point="14"] &
+                display: inline-block
     &__progress
         position: fixed
         bottom: 37px
@@ -96,8 +137,9 @@
 
         opacity: 0
         transform: translate3d(-50%, 20px, 0)
-        transition: 0.5s ease-out
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out
         transition-delay: 0.5s
+        will-change: opacity, transform
         +max-screen($breakpoint-md)
             bottom: 62px
 
@@ -146,3 +188,4 @@
                             display: none
             #progress-circle
                 stroke: #2A8C84
+                will-change: stroke-dashoffset , stroke

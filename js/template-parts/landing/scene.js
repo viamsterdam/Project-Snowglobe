@@ -1,5 +1,5 @@
 import $  from 'jquery';
-import { gsap , TimelineLite} from "gsap";
+import { gsap } from "gsap";
 import bodymovin from 'lottie-web/build/player/lottie_svg.min.js';
 import bodymovinCanvas from 'lottie-web/build/player/lottie_canvas.min.js';
 import { throttle } from 'throttle-debounce';
@@ -24,9 +24,12 @@ class Scene {
 
         this.soundButton = $('#sound-button');
         this.sound = $('#sound').get(0);
+        this.sound.volume = 0.5;
         this.muted = true;
 
         this.progress = 0; //current progress of the scene
+        this.stepCount = 0;
+
 
         this.progressCircle = $('#progress-circle');
         this.progressCircleLength = 150.72;
@@ -58,7 +61,21 @@ class Scene {
                 let point = {};
                 point.block = $(this);
                 point.block.addClass('enter');
-                point.position = parseInt($(this).data('appear'));
+
+               // data points for each screen size. Desktop 1600+, Laptop 1280, Tablet-portrait 768, Mobile 320,
+                if($(window).width()>1600){
+                    point.position = parseInt($(this).data('appear-desktop'));
+                } 
+                else if($(window).width()>1280){
+                    point.position = parseInt($(this).data('appear-laptop'))
+                }
+                else if($(window).width()>768){
+                    point.position = parseInt($(this).data('appear-tablet'))
+                }
+                else {
+                    point.position = parseInt($(this).data('appear-mobile'));
+                }
+
                 point.animation = $(this).data('animation');
                 that.points.push(point);
             });
@@ -83,7 +100,7 @@ class Scene {
     init() {
     
         this.resize();
-        $(window).resize(this.resize.bind(this));
+        $(window).on('resize',this.resize.bind(this));
     
     }
 
@@ -104,7 +121,11 @@ class Scene {
             element.bgLayer1.width(this.itemWidth);
         });
 
-        this.onProgressChange();
+        if(this.stepCount != 0){
+            this.onProgressChange();
+        }
+
+        this.stepCount++;
     }
 
     initFullScroll(){
@@ -236,13 +257,13 @@ class Scene {
 
         
         //colors
-        this.bgColorAnimation = new TimelineLite({paused:true});
+        this.bgColorAnimation = gsap.timeline({paused:true});
         this.bgColorAnimation.to(this.bgGlobal , { backgroundColor: '#F1AB79' } ).to(this.bgGlobal , { backgroundColor: '#13558C' } );
 
-        this.barColorAnimation = new TimelineLite({paused:true});
+        this.barColorAnimation = gsap.timeline({paused:true});
         this.barColorAnimation.to(this.sceneBar , { backgroundColor: '#2F2954' } ).to(this.sceneBar , { backgroundColor: '#072A4D' } );
 
-        this.progressColorAnimation = new TimelineLite({paused:true});
+        this.progressColorAnimation = gsap.timeline({paused:true});
         this.progressColorAnimation.to(this.progressCircle , { stroke: '#F1AB79' } ).to(this.progressCircle , { stroke: '#13558C' } );
         
     }
@@ -251,54 +272,59 @@ class Scene {
         let oldPoint = this.currentPoint;
         this.currentPoint = this.currentPoint<=0?this.currentPoint:this.currentPoint-1;
 
+        this.sceneBlock.attr('data-point', this.currentPoint+1);
+        this.sceneBlock.removeClass('scene-forward').addClass('scene-back');
+
         this.progress = 0.01*this.points[this.currentPoint].position;
         this.onProgressChange();
 
         this.points[oldPoint].block.removeClass('leave').addClass('enter').removeClass('active');
-        this.points[this.currentPoint].block.addClass('leave').addClass('active');
+        this.points[this.currentPoint].block.removeClass('enter').addClass('leave').addClass('active');
 
+        //change logos
         this.logoChange();
-        this.lottieAnimations();
+        this.linkChange();
+        setTimeout(()=>{
+            this.lottieAnimations();
+        },1000);
     }
 
     nextSlide(){
         let oldPoint = this.currentPoint;
-        this.currentPoint = this.currentPoint>=this.points.length?this.currentPoint:this.currentPoint+1;
+        this.currentPoint = (this.currentPoint+1)>=this.points.length?this.currentPoint:this.currentPoint+1;
 
-        this.progress = 0.01*this.points[this.currentPoint].position;
-        
+        if(this.currentPoint != oldPoint){
+            this.sceneBlock.attr('data-point', this.currentPoint+1);
+            this.sceneBlock.removeClass('scene-back').addClass('scene-forward');
 
-        this.onProgressChange();
+            this.progress = 0.01*this.points[this.currentPoint].position;
+            this.onProgressChange();
 
-        //previous animation
-        if(this.currentPoint!=15){
-            this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+            //previous animation
+            if(this.currentPoint!=15){
+                this.points[oldPoint].block.removeClass('enter').addClass('leave').removeClass('active');
+            }
+
+            this.points[this.currentPoint].block.addClass('enter').addClass('active');
+
+            //change logos
+            this.logoChange();
+            this.linkChange();
+            setTimeout(()=>{
+                this.lottieAnimations();
+            },1000);
         }
-        this.points[this.currentPoint].block.addClass('enter').addClass('active');
-        
-        //gsap.to( that.points[oldPoint].block, {opacity: 0, y: -20 , duration: 0.2 });
-        //gsap.to( that.this.points[this.currentPoint].block , {opacity: 1, y: 0 , duration: 0.2 })
-
-        //change logos
-        this.logoChange();
-        this.lottieAnimations();
-
     }
 
     onProgressChange(){
 
-        gsap.to($('.scene-bg-layer-1'),{
-            ease: "easeout",
-            xPercent: -this.progress*100,
-            left: this.progress*this.screenWidth,
-            duration: 1
-        });
-
-        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
-            ease: "easeout",
-            xPercent: -this.progress*100,
-            left: this.progress*this.screenWidth,
-            duration: 1
+        $('.scene-bg-layer').each((index , element)=>{
+            let el = $(element);
+            gsap.to(el,{
+                ease: "easeout",
+                x: -this.progress*(el.width()-this.screenWidth),
+                duration: 1,
+            });
         });
 
         gsap.to(this.progressCircle,{
@@ -365,13 +391,17 @@ class Scene {
             this.items[2].animation2.pause();
         }
         
-
         if(this.currentPoint>=14){
             this.fireworksWrapper.fadeIn();
             this.fireworks.play();
         } else{
             this.fireworksWrapper.fadeOut();
             this.fireworks.pause();
+        }
+        if(this.currentPoint>=15){
+            this.carWrapper.addClass('finished');
+        } else{
+            this.carWrapper.removeClass('finished');
         }
     }
 
@@ -407,11 +437,13 @@ class Scene {
         $('.header-logo__item').removeClass('active');
         $('.header-logo__item-'+1).addClass('active');
 
-        gsap.to($('.scene-bg-layer:not(.scene-bg-layer-1)'),{
-            ease: "easein",
+        gsap.to($('.scene-bg-layer'),{
+            ease: "easeout",
             y: 0,
-            duration: 0.7
+            duration: 1.2
         });
+
+        this.sceneBlock.attr('data-point', 1);
 
         this.car.play();
         this.playSound();
