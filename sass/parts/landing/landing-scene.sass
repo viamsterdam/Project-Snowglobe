@@ -112,9 +112,13 @@
         max-width: 30%
         z-index: 6
         transition: bottom 0.8s, left 0.8s, transform 0.8s
+        transform-origin: center
+        //transform: rotateY(0deg)
+        //transform-style: preserve-3d
+        //backface-visibility: visible
         .scene-back &
-            transform: rotateY(180deg)
-            transform-style: preserve-3d
+            //transform: rotateY(180deg)
+            //transform-style: preserve-3d
         +screen(1000px, 1120px)
             .scene[data-point="16"] &
                 bottom: 170px
@@ -134,11 +138,11 @@
                 bottom: 220px
         +screen(0px, 620px)
             .scene[data-point="12"] &
-                bottom: 170px
+                bottom: 160px
             .scene[data-point="13"] &
-                bottom: 200px
+                bottom: 175px
             .scene[data-point="14"] &
-                bottom: 220px
+                bottom: 210px
             .scene[data-point="15"] &
                 bottom: 220px
             .scene[data-point="16"] &
