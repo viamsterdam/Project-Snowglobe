@@ -292,6 +292,7 @@
             <div class="scene-bg-layer__item scene-bg-layer__item-3" data-index="3" data-path="<?php echo get_template_directory_uri(); ?>/assets/scene/scene-1-3.json"></div>
         </div>
         <div id="scene-car" class="scene-bg-car" data-path="<?php echo get_template_directory_uri(); ?>/assets/lottie/auto.json"></div>
+        <div id="scene-car-reverse" class="scene-bg-car" data-path="<?php echo get_template_directory_uri(); ?>/assets/lottie/reverse-car.json"></div>
         <div class="scene-bg-layer scene-bg-layer-2">
             <div class="scene-bg-layer__item scene-bg-layer__item-1" data-index="1" data-path="<?php echo get_template_directory_uri(); ?>/assets/scene/scene-2-1.json"></div>
             <div class="scene-bg-layer__item scene-bg-layer__item-2" data-index="2" data-path="<?php echo get_template_directory_uri(); ?>/assets/scene/scene-2-2.json"></div>
