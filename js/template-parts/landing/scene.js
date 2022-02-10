@@ -275,6 +275,9 @@ class Scene {
         this.sceneBlock.attr('data-point', this.currentPoint+1);
         this.sceneBlock.removeClass('scene-forward').addClass('scene-back');
 
+        this.car.pause();
+        this.carReverse.play();
+
         this.progress = 0.01*this.points[this.currentPoint].position;
         this.onProgressChange();
 
@@ -296,6 +299,9 @@ class Scene {
         if(this.currentPoint != oldPoint){
             this.sceneBlock.attr('data-point', this.currentPoint+1);
             this.sceneBlock.removeClass('scene-back').addClass('scene-forward');
+
+            this.car.play();
+            this.carReverse.pause();
 
             this.progress = 0.01*this.points[this.currentPoint].position;
             this.onProgressChange();
@@ -400,8 +406,10 @@ class Scene {
         }
         if(this.currentPoint>=15){
             this.carWrapper.addClass('finished');
+            this.carReverseWrapper.addClass('finished');
         } else{
             this.carWrapper.removeClass('finished');
+            this.carReverseWrapper.removeClass('finished');
         }
     }
 
@@ -475,12 +483,25 @@ class Scene {
             renderer: 'svg', // Required
             loop: true, // Optional
             autoplay: false, // Optional
-            name: "Loader", // Name for future reference. Optional.
+            name: "Car", // Name for future reference. Optional.
+            rendererSettings: {
+                
+            }
+        });
+        this.carReverseWrapper = $('#scene-car-reverse');
+        this.carReverse = bodymovin.loadAnimation({
+            container: this.carReverseWrapper.get(0), // Required
+            path: this.carReverseWrapper.data('path'), // Required
+            renderer: 'svg', // Required
+            loop: true, // Optional
+            autoplay: false, // Optional
+            name: "Car reverse", // Name for future reference. Optional.
             rendererSettings: {
                 
             }
         });
         this.animationsArray.push(this.car);
+        this.animationsArray.push(this.carReverse);
 
         this.snowWrapper = $('#snow');
         this.snow = bodymovin.loadAnimation({

@@ -111,7 +111,7 @@
         width: 300px
         max-width: 30%
         z-index: 6
-        transition: bottom 0.8s, left 0.8s, transform 0.8s
+        transition: bottom 0.8s, left 0.8s, transform 0.8s, opacity 0.1s ease-out
         transform-origin: center
         //transform: rotateY(0deg)
         //transform-style: preserve-3d
@@ -156,10 +156,23 @@
                 left: 0
         &.finished
             left: calc(100vw)
-            transition: left 4s ease-out
+            transition: left 4s ease-out, opacity 0.1s ease-out
             +max-screen($breakpoint-md)
-                transition: left 1s ease-out
+                transition: left 1s ease-out, opacity 0.1s ease-out
 
+        &#scene-car-reverse
+            opacity: 0
+            transform: skewY(-5deg)
+        .scene-forward &#scene-car-reverse
+            opacity: 0
+        .scene-back &#scene-car-reverse
+            opacity: 1
+            transform: skewY(0)
+        .scene-forward &#scene-car
+
+        .scene-back &#scene-car
+            opacity: 0
+            transform: skewY(5deg)
     #snow , #fireworks
         position: fixed
         top: 0
